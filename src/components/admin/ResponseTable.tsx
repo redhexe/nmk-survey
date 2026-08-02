@@ -63,6 +63,7 @@ export default function ResponseTable({ responses }: { responses: any[] }) {
               <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">생성 일시</th>
               <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">소요 시간(초)</th>
               <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">진행 상태</th>
+              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">최종 도달</th>
               <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">선택 언어</th>
               <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">유효성 태그</th>
               <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">세부 보기</th>
@@ -73,6 +74,22 @@ export default function ResponseTable({ responses }: { responses: any[] }) {
               const tags = getValidityTags(r);
               const isExpanded = expandedRow === r.id;
               
+              let lastSection = '-';
+              if (!r.is_complete && r.section_timestamps) {
+                const keys = Object.keys(r.section_timestamps).filter(k => r.section_timestamps[k]);
+                if (keys.length > 0) {
+                  keys.sort((a, b) => new Date(r.section_timestamps[b]).getTime() - new Date(r.section_timestamps[a]).getTime());
+                  lastSection = keys[0];
+                }
+              } else if (r.is_complete) {
+                lastSection = '완료(F)';
+              }
+
+              let isLangMismatch = false;
+              if (r.a4_language && r.e3_signage_language && r.e3_signage_language !== 'None of these (there was no guidance in my language)' && r.a4_language !== r.e3_signage_language) {
+                isLangMismatch = true;
+              }
+
               return (
                 <React.Fragment key={r.id}>
                   <tr className={`hover:bg-blue-50/30 transition-colors ${r.is_test ? 'bg-gray-50/50 opacity-60' : ''}`}>
@@ -94,8 +111,14 @@ export default function ResponseTable({ responses }: { responses: any[] }) {
                         </span>
                       )}
                     </td>
-                    <td className="px-6 py-4 uppercase text-gray-600 font-semibold text-xs tracking-wider">
-                      {r.language || '-'}
+                    <td className="px-6 py-4">
+                      {lastSection !== '-' ? <span className="font-semibold text-gray-600 bg-gray-100 px-2 py-1 rounded-md text-xs">{lastSection}</span> : <span className="text-gray-300">-</span>}
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-2 uppercase text-gray-600 font-semibold text-xs tracking-wider">
+                        {r.language || '-'}
+                        {isLangMismatch && <span title="A4와 E3 언어 불일치" className="text-red-500 text-[16px]">⚠️</span>}
+                      </div>
                     </td>
                     <td className="px-6 py-4 flex gap-1.5 flex-wrap">
                       {tags.map((tag, i) => (
@@ -115,7 +138,7 @@ export default function ResponseTable({ responses }: { responses: any[] }) {
                   </tr>
                   {isExpanded && (
                     <tr className="bg-gray-50/50 border-b border-gray-100">
-                      <td colSpan={6} className="px-6 py-6">
+                      <td colSpan={7} className="px-6 py-6">
                         <pre className="text-xs text-gray-600 whitespace-pre-wrap bg-white p-4 rounded-xl border border-gray-200 overflow-x-auto shadow-inner">
                           {JSON.stringify(r, null, 2)}
                         </pre>
@@ -127,7 +150,7 @@ export default function ResponseTable({ responses }: { responses: any[] }) {
             })}
             {responses.length === 0 && (
               <tr>
-                <td colSpan={6} className="px-6 py-16 text-center text-gray-400 font-medium">
+                <td colSpan={7} className="px-6 py-16 text-center text-gray-400 font-medium">
                   데이터가 없습니다.
                 </td>
               </tr>
