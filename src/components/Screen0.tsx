@@ -47,12 +47,12 @@ export default function Screen0({ sessionId, onNext }: Screen0Props) {
     <div className="min-h-[100dvh] flex flex-col w-full max-w-md mx-auto relative bg-white pb-40">
       <div className="p-6 flex-1 flex flex-col justify-start pt-2">
         
-        <div className="text-center mb-1 text-[#999999] text-[12px] font-medium leading-relaxed">
+        <div className="text-center mb-6 text-[#999999] text-[12px] font-medium leading-relaxed">
           본 설문은 외국인 관람객을 대상으로 하는 연구 설문입니다.<br/>
           This survey is for international visitors only.
         </div>
 
-        <div className="flex justify-center mb-8">
+        <div className="flex justify-center mb-6">
           <img src="/logo.png" alt="Kookmin University Logo" className="h-11 object-contain" />
         </div>
 
