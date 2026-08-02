@@ -42,31 +42,37 @@ export default function ExportActions({ responses, onDataChanged }: { responses:
   };
 
   return (
-    <div className="flex gap-4 mb-8 p-4 bg-white rounded shadow border border-gray-100">
+    <div className="flex flex-col md:flex-row gap-6 p-5 bg-white rounded-2xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] border border-gray-100">
       <div className="flex-1">
-        <h3 className="font-bold mb-2">CSV 내보내기</h3>
-        <div className="flex gap-2">
+        <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+          <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+          데이터 내보내기 (CSV)
+        </h3>
+        <div className="flex flex-wrap gap-3">
           <button 
             onClick={handleExportAll}
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            className="px-4 py-2 bg-gray-50 text-gray-700 text-sm font-medium rounded-lg border border-gray-200 hover:bg-gray-100 transition-colors flex items-center gap-2"
           >
-            전체 다운로드 (테스트 포함)
+            전체 다운로드
           </button>
           <button 
             onClick={handleExportValid}
-            className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+            className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg shadow-sm shadow-blue-500/30 hover:bg-blue-700 transition-colors flex items-center gap-2"
           >
-            유효 응답만 다운로드 (테스트 제외)
+            유효 응답만 다운로드
           </button>
         </div>
       </div>
       
-      <div className="border-l pl-4">
-        <h3 className="font-bold mb-2 text-red-600">위험 구역</h3>
+      <div className="md:border-l border-gray-100 md:pl-6">
+        <h3 className="text-sm font-semibold text-red-600 mb-3 flex items-center gap-2">
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+          위험 구역
+        </h3>
         <button 
           onClick={handleDeleteTests}
           disabled={isDeleting}
-          className="px-4 py-2 bg-red-100 text-red-700 border border-red-300 rounded hover:bg-red-200 disabled:opacity-50"
+          className="px-4 py-2 bg-red-50 text-red-600 text-sm font-medium border border-red-200 rounded-lg hover:bg-red-100 disabled:opacity-50 transition-colors flex items-center gap-2"
         >
           {isDeleting ? '삭제 중...' : '테스트 데이터 싹 다 지우기'}
         </button>

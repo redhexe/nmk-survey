@@ -96,37 +96,45 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4 md:p-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800">설문 응답 대시보드</h1>
+    <div className="min-h-screen bg-[#f8f9fa] p-4 md:p-8 font-sans">
+      <div className="max-w-[1400px] mx-auto">
+        <div className="flex justify-between items-center mb-8 pb-6 border-b border-gray-200">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900 tracking-tight">설문 응답 대시보드</h1>
+            <p className="text-sm text-gray-500 mt-1">국립중앙박물관 대기경험조사 실시간 데이터</p>
+          </div>
           <button 
             onClick={fetchResponses}
-            className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 text-sm font-medium"
+            className="px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-lg shadow-sm hover:bg-gray-50 hover:text-blue-600 transition-colors text-sm font-semibold flex items-center gap-2"
           >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
             데이터 새로고침
           </button>
         </div>
 
-        {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">{error}</div>}
+        {error && <div className="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded mb-6 shadow-sm">{error}</div>}
         
-        {loading && <div className="text-center py-4 text-gray-500">데이터를 불러오는 중입니다...</div>}
+        {loading && (
+          <div className="flex justify-center items-center py-20">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+          </div>
+        )}
 
         {!loading && (
-          <>
+          <div className="flex flex-col gap-6">
             <ExportActions responses={responses} onDataChanged={fetchResponses} />
             <SummaryCards responses={responses} />
             
-            <div className="mb-8">
-              <h2 className="text-xl font-bold mb-4 text-gray-800">통계 차트 (테스트 데이터 제외)</h2>
+            <div className="mt-4">
+              <h2 className="text-lg font-bold mb-4 text-gray-900 tracking-tight">통계 차트 <span className="text-sm font-normal text-gray-500 ml-2">(테스트 데이터 제외)</span></h2>
               <Charts responses={responses} />
             </div>
 
-            <div>
-              <h2 className="text-xl font-bold mb-4 text-gray-800">응답 목록 전체 (테스트 포함)</h2>
+            <div className="mt-8">
+              <h2 className="text-lg font-bold mb-4 text-gray-900 tracking-tight">응답 목록 전체 <span className="text-sm font-normal text-gray-500 ml-2">(테스트 포함)</span></h2>
               <ResponseTable responses={responses} />
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>

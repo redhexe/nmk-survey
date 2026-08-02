@@ -55,73 +55,86 @@ export default function ResponseTable({ responses }: { responses: any[] }) {
   };
 
   return (
-    <div className="bg-white rounded shadow overflow-x-auto">
-      <table className="min-w-full divide-y divide-gray-200 text-sm">
-        <thead className="bg-gray-50">
-          <tr>
-            <th className="px-4 py-3 text-left font-medium text-gray-500">생성 일시</th>
-            <th className="px-4 py-3 text-left font-medium text-gray-500">소요 시간(초)</th>
-            <th className="px-4 py-3 text-left font-medium text-gray-500">진행 상태</th>
-            <th className="px-4 py-3 text-left font-medium text-gray-500">선택 언어</th>
-            <th className="px-4 py-3 text-left font-medium text-gray-500">유효성 태그</th>
-            <th className="px-4 py-3 text-left font-medium text-gray-500">세부 보기</th>
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-gray-200">
-          {responses.map((r) => {
-            const tags = getValidityTags(r);
-            const isExpanded = expandedRow === r.id;
-            
-            return (
-              <React.Fragment key={r.id}>
-                <tr className={`hover:bg-gray-50 ${r.is_test ? 'bg-gray-100 opacity-70' : ''}`}>
-                  <td className="px-4 py-3 whitespace-nowrap">
-                    {new Date(r.created_at).toLocaleString('ko-KR')}
-                  </td>
-                  <td className="px-4 py-3">{r.duration_seconds || '-'}</td>
-                  <td className="px-4 py-3">
-                    {r.is_complete ? (
-                      <span className="text-green-600 font-medium">완료</span>
-                    ) : (
-                      <span className="text-gray-400">진행 중</span>
-                    )}
-                  </td>
-                  <td className="px-4 py-3 uppercase">{r.language || '-'}</td>
-                  <td className="px-4 py-3 flex gap-1 flex-wrap">
-                    {tags.map((tag, i) => (
-                      <span key={i} className={`${tag.color} text-white px-2 py-0.5 rounded text-xs font-bold`}>
-                        {tag.label}
-                      </span>
-                    ))}
-                  </td>
-                  <td className="px-4 py-3">
-                    <button 
-                      onClick={() => setExpandedRow(isExpanded ? null : r.id)}
-                      className="text-blue-600 hover:underline"
-                    >
-                      {isExpanded ? '닫기' : '보기'}
-                    </button>
-                  </td>
-                </tr>
-                {isExpanded && (
-                  <tr className="bg-gray-50">
-                    <td colSpan={6} className="px-6 py-4">
-                      <pre className="text-xs text-gray-700 whitespace-pre-wrap">
-                        {JSON.stringify(r, null, 2)}
-                      </pre>
+    <div className="bg-white rounded-2xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] border border-gray-100 overflow-hidden">
+      <div className="overflow-x-auto">
+        <table className="min-w-full divide-y divide-gray-100 text-sm">
+          <thead className="bg-gray-50/50">
+            <tr>
+              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">생성 일시</th>
+              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">소요 시간(초)</th>
+              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">진행 상태</th>
+              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">선택 언어</th>
+              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">유효성 태그</th>
+              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">세부 보기</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-100 bg-white">
+            {responses.map((r) => {
+              const tags = getValidityTags(r);
+              const isExpanded = expandedRow === r.id;
+              
+              return (
+                <React.Fragment key={r.id}>
+                  <tr className={`hover:bg-blue-50/30 transition-colors ${r.is_test ? 'bg-gray-50/50 opacity-60' : ''}`}>
+                    <td className="px-6 py-4 whitespace-nowrap text-gray-900 font-medium">
+                      {new Date(r.created_at).toLocaleString('ko-KR')}
+                    </td>
+                    <td className="px-6 py-4 text-gray-600 font-medium">
+                      {r.duration_seconds ? <span className="px-2 py-1 bg-gray-100 rounded-md text-xs">{r.duration_seconds}s</span> : <span className="text-gray-300">-</span>}
+                    </td>
+                    <td className="px-6 py-4">
+                      {r.is_complete ? (
+                        <span className="inline-flex items-center gap-1 text-green-600 font-medium text-xs bg-green-50 px-2 py-1 rounded-md">
+                          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
+                          완료
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1 text-gray-400 font-medium text-xs bg-gray-50 px-2 py-1 rounded-md">
+                          진행 중
+                        </span>
+                      )}
+                    </td>
+                    <td className="px-6 py-4 uppercase text-gray-600 font-semibold text-xs tracking-wider">
+                      {r.language || '-'}
+                    </td>
+                    <td className="px-6 py-4 flex gap-1.5 flex-wrap">
+                      {tags.map((tag, i) => (
+                        <span key={i} className={`${tag.color} text-white px-2 py-1 rounded-md text-[11px] font-bold shadow-sm`}>
+                          {tag.label}
+                        </span>
+                      ))}
+                    </td>
+                    <td className="px-6 py-4">
+                      <button 
+                        onClick={() => setExpandedRow(isExpanded ? null : r.id)}
+                        className="text-blue-600 hover:text-blue-800 font-medium text-xs bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg transition-colors"
+                      >
+                        {isExpanded ? '닫기' : '상세보기'}
+                      </button>
                     </td>
                   </tr>
-                )}
-              </React.Fragment>
-            );
-          })}
-          {responses.length === 0 && (
-            <tr>
-              <td colSpan={6} className="px-6 py-8 text-center text-gray-500">데이터가 없습니다.</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+                  {isExpanded && (
+                    <tr className="bg-gray-50/50 border-b border-gray-100">
+                      <td colSpan={6} className="px-6 py-6">
+                        <pre className="text-xs text-gray-600 whitespace-pre-wrap bg-white p-4 rounded-xl border border-gray-200 overflow-x-auto shadow-inner">
+                          {JSON.stringify(r, null, 2)}
+                        </pre>
+                      </td>
+                    </tr>
+                  )}
+                </React.Fragment>
+              );
+            })}
+            {responses.length === 0 && (
+              <tr>
+                <td colSpan={6} className="px-6 py-16 text-center text-gray-400 font-medium">
+                  데이터가 없습니다.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
