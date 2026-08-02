@@ -104,6 +104,8 @@
     "agree": "我同意",
     "disagree": "不同意",
     "search": "搜索国家...",
-    "multiple_select": "(可多选)"
+    "multiple_select": "(可多选)",
+    "incomplete_warning": "还有未回答的必填项。",
+    "scroll_warning": "请向下滑动至页面底部。"
   }
 }

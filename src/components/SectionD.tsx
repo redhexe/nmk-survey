@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { supabase } from '@/lib/supabase';
 import { translations } from '@/lib/translations';
 
@@ -46,15 +46,23 @@ export default function SectionD({ sessionId, onNext, onPrev }: SectionProps) {
   
   const [isSaving, setIsSaving] = useState(false);
 
+  const bottomRef = useRef<HTMLDivElement>(null);
+  const [isScrolledToBottom, setIsScrolledToBottom] = useState(false);
+  const [showWarning, setShowWarning] = useState('');
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) setIsScrolledToBottom(true);
+    });
+    if (bottomRef.current) observer.observe(bottomRef.current);
+    return () => observer.disconnect();
+  }, []);
   const t = translations[lang]?.sectionD || translations['en'].sectionD;
   const enBase = translations['en'].sectionD;
   const tc = translations[lang]?.common || translations['en'].common;
   const ta = translations[lang]?.sectionA || translations['en'].sectionA;
 
   const handleNext = async () => {
-    // D1 is required (all 3)
-    if (d1_1 === null || d1_2 === null || d1_3 === null) return;
-    
     setIsSaving(true);
     await supabase.from('responses').update({ 
       d1_1, d1_2, d1_3,
@@ -64,7 +72,21 @@ export default function SectionD({ sessionId, onNext, onPrev }: SectionProps) {
     onNext();
   };
 
-  const isNextDisabled = d1_1 === null || d1_2 === null || d1_3 === null || isSaving;
+  const isRequiredAnswered = d1_1 !== null && d1_2 !== null && d1_3 !== null;
+  const isReady = isScrolledToBottom && isRequiredAnswered;
+
+  const handleNextClick = () => {
+    if (!isScrolledToBottom) {
+      setShowWarning(tc.scroll_warning);
+      return;
+    }
+    if (!isRequiredAnswered) {
+      setShowWarning(tc.incomplete_warning);
+      return;
+    }
+    setShowWarning('');
+    handleNext();
+  };
 
   return (
     <div className="min-h-screen bg-white flex flex-col max-w-md mx-auto relative pb-28">
@@ -105,13 +127,20 @@ export default function SectionD({ sessionId, onNext, onPrev }: SectionProps) {
         </div>
 
       </div>
-      <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto p-5 pb-8 bg-white border-t border-gray-100 flex gap-3">
-        <button onClick={onPrev} className="flex-1 py-4 rounded-2xl text-[18px] font-bold text-[#4e5968] bg-[#f2f4f6] hover:bg-[#e5e8eb] transition-colors">
-          {ta.back}
-        </button>
-        <button onClick={handleNext} disabled={isNextDisabled} className={`flex-[2] py-4 rounded-2xl text-[18px] font-bold text-white transition-colors ${isNextDisabled ? 'bg-[#d1d6db] cursor-not-allowed' : 'bg-[#3182f6] hover:bg-[#1b64da] active:bg-[#1b64da] shadow-lg shadow-blue-500/20'}`}>
-          {isSaving ? tc.saving : ta.next}
-        </button>
+      </div>
+      <div ref={bottomRef} className="h-1" />
+      <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white border-t border-gray-100 z-10">
+        {showWarning && (
+          <p className="text-center text-[#e53e3e] text-[13px] font-bold pt-3 px-4 leading-tight">{showWarning}</p>
+        )}
+        <div className="p-5 pb-8 flex gap-3">
+          <button onClick={onPrev} className="flex-1 py-4 rounded-2xl text-[18px] font-bold text-[#4e5968] bg-[#f2f4f6] hover:bg-[#e5e8eb] transition-colors">
+            {ta.back}
+          </button>
+          <button onClick={handleNextClick} disabled={isSaving} className={`flex-[2] py-4 rounded-2xl text-[18px] font-bold text-white transition-colors ${!isReady ? 'bg-[#d1d6db]' : 'bg-[#3182f6] hover:bg-[#1b64da] active:bg-[#1b64da] shadow-lg shadow-blue-500/20'}`}>
+            {isSaving ? tc.saving : ta.next}
+          </button>
+        </div>
       </div>
     </div>
   );

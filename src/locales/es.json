@@ -104,6 +104,8 @@
     "agree": "Acepto",
     "disagree": "No acepto",
     "search": "Buscar país...",
-    "multiple_select": "(Es posible seleccionar varias opciones)"
+    "multiple_select": "(Es posible seleccionar varias opciones)",
+    "incomplete_warning": "Faltan preguntas obligatorias por responder.",
+    "scroll_warning": "Por favor, desplázate hasta el final de la página."
   }
 }

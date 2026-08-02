@@ -104,6 +104,8 @@
     "agree": "同意する",
     "disagree": "同意しない",
     "search": "国を検索...",
-    "multiple_select": "(複数選択可)"
+    "multiple_select": "(複数選択可)",
+    "incomplete_warning": "まだ回答されていない必須項目があります。",
+    "scroll_warning": "ページの一番下までスクロールしてください。"
   }
 }

@@ -100,10 +100,12 @@
     "enjoy": "Bonne visite."
   },
   "common": {
-    "saving": "Sauvegarde...",
+    "saving": "Enregistrement...",
     "agree": "J'accepte",
     "disagree": "Je n'accepte pas",
     "search": "Rechercher un pays...",
-    "multiple_select": "(Plusieurs choix possibles)"
+    "multiple_select": "(Plusieurs choix possibles)",
+    "incomplete_warning": "Il y a des questions obligatoires sans réponse.",
+    "scroll_warning": "Veuillez faire défiler jusqu'en bas."
   }
 }

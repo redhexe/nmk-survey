@@ -104,6 +104,8 @@
     "agree": "I agree",
     "disagree": "I do not agree",
     "search": "Search country...",
-    "multiple_select": "(Multiple selections possible)"
+    "multiple_select": "(Multiple selections possible)",
+    "incomplete_warning": "There are unanswered required items.",
+    "scroll_warning": "Please scroll to the bottom."
   }
 }
