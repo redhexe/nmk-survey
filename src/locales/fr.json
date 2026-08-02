@@ -1,0 +1,108 @@
+{
+  "screen0": {
+    "welcome": "Bienvenue dans notre enquête",
+    "intro": "Merci de votre visite\nau Musée national de Corée.\n\nJe suis chercheur/chercheuse à l'École\nsupérieure de design technologique\nde l'Université Kookmin.\nCe court questionnaire (environ 4 minutes)\ns'inscrit dans une étude visant à améliorer\nl'expérience des visiteurs\ninternationaux comme vous.\n\nToutes les réponses sont entièrement\nanonymes — aucune information personnelle\nidentifiable n'est collectée.",
+    "consent": "Je comprends et j'accepte de participer",
+    "instruction": "Veuillez remplir ce questionnaire juste avant d'entrer dans les salles d'exposition.",
+    "ok": "Commencer le questionnaire",
+    "selectLanguage": "Veuillez sélectionner votre langue"
+  },
+  "sectionA": {
+    "title": "Section A. À propos de vous",
+    "a1": "A1. Dans quel pays vivez-vous ?",
+    "a1_placeholder": "Sélectionnez un pays...",
+    "a2": "A2. Quelle est votre tranche d'âge ?",
+    "a2_options": ["Moins de 20 ans", "20-29 ans", "30-39 ans", "40-49 ans", "50-59 ans", "60 ans ou plus"],
+    "a3": "A3. Quel est votre sexe ?",
+    "a3_options": ["Homme", "Femme"],
+    "a4": "A4. Quelle langue utilisez-vous principalement au quotidien ?",
+    "a4_options": ["Anglais", "Chinois", "Japonais", "Coréen", "Espagnol", "Français", "Autre (veuillez préciser)"],
+    "a4_placeholder": "Veuillez préciser",
+    "next": "Suivant",
+    "back": "Retour"
+  },
+  "sectionB": {
+    "title": "Section B. Votre visite",
+    "b1": "B1. Qu'est-ce qui vous amène en Corée ?",
+    "b1_options": ["Voyage / tourisme", "Je vis en Corée", "Études / formation", "Affaires", "Autre"],
+    "b2": "B2. Est-ce votre première visite au Musée National de Corée ?",
+    "b2_options": ["Première visite", "Je suis déjà venu(e) ici"],
+    "b3": "B3. Combien de personnes vous accompagnent aujourd'hui ?",
+    "b3_options": ["Seul(e)", "2 personnes", "3-4 personnes", "5 personnes ou plus"],
+    "b4": "B4. Avez-vous cherché des informations sur ce musée ou ses expositions avant de venir ?",
+    "b4_options": ["Oui, en détail", "Oui, un peu", "Non"],
+    "b5": "B5. Avez-vous apporté un sac ou des bagages avec vous aujourd'hui ?",
+    "b5_options": ["Un sac à dos ou un grand sac", "Seulement un petit sac ou un sac à main", "Rien en particulier"]
+  },
+  "sectionC": {
+    "title": "Section C. Votre expérience d'attente aujourd'hui",
+    "c1": "C1. Comment avez-vous perçu le temps passé à attendre pour entrer ?",
+    "c1_options": ["1. Très court", "2. Court", "3. Neutre", "4. Long", "5. Très long"],
+    "c2": "C2. Comment vous êtes-vous senti(e) en attendant ?",
+    "c2_options": ["Ennuyé(e)", "Anxieux(se)", "Confus(e)", "Excité(e)", "Détendu(e)", "Inconfortable physiquement (chaleur, fatigue)"],
+    "c3": "C3. Quelle partie vous a semblé la plus inconfortable ?",
+    "c3_options": ["La marche de la station de métro au musée", "L'esplanade et les escaliers extérieurs devant le musée", "La file d'attente extérieure devant le bâtiment", "La file d'attente pour le contrôle de sécurité des sacs", "Le long couloir intérieur avant les salles d'exposition", "Rien ne m'a semblé particulièrement inconfortable"],
+    "c5": "C5. Combien de temps pensez-vous avoir réellement attendu avant d'entrer dans les salles ?",
+    "c5_options": ["Moins de 5 minutes", "5-10 minutes", "10-20 minutes", "20-30 minutes", "Plus de 30 minutes"],
+    "c4": "C4. Pendant l'attente, dans quelle mesure êtes-vous d'accord avec chaque affirmation ?",
+    "c4_q": [
+      "1. Je comprenais à quoi servait la file dans laquelle j'étais",
+      "2. Je savais combien de temps je devais encore attendre",
+      "3. Je savais où je devais aller",
+      "4. Le temps d'attente ne m'a pas semblé ennuyeux",
+      "5. La zone d'attente était confortable (chaleur, foule, sièges)",
+      "6. Il y avait quelque chose d'intéressant à regarder en attendant",
+      "7. La zone d'attente ne semblait pas exiguë",
+      "8. Le bruit environnant ne m'a pas dérangé(e)"
+    ],
+    "disagree": "Pas du tout d'accord",
+    "agree": "Tout à fait d'accord"
+  },
+  "sectionD": {
+    "title": "Section D. Vos attentes en ce moment",
+    "d1": "D1. Vous êtes sur le point de voir l'exposition. Dans quelle mesure êtes-vous d'accord avec chaque affirmation ?",
+    "d1_q": [
+      "1. J'ai hâte de voir l'exposition",
+      "2. Je m'attends à ce que la visite d'aujourd'hui soit agréable",
+      "3. J'ai une idée claire de ce que je vais voir"
+    ],
+    "d2": "D2. Le temps passé à attendre a-t-il affecté vos attentes pour la visite ?",
+    "d2_options": ["Cela a augmenté mes attentes", "Aucun changement", "Cela a diminué mes attentes"],
+    "disagree": "Pas du tout d'accord",
+    "agree": "Tout à fait d'accord"
+  },
+  "sectionE": {
+    "title": "Section E. Informations et comportement en attendant",
+    "e1": "E1. Qu'avez-vous principalement fait en attendant ?",
+    "e1_options": ["J'ai regardé mon téléphone", "J'ai discuté avec mes accompagnateurs", "J'ai regardé autour de moi", "J'ai lu les panneaux", "J'ai pris un dépliant ou un plan à l'entrée", "Rien en particulier", "Il était difficile d'utiliser mon téléphone à cause de mes sacs ou de mes affaires"],
+    "e2": "E2. Si vous avez utilisé votre téléphone, qu'avez-vous regardé ?",
+    "e2_options": ["Informations sur le musée ou l'exposition", "Cartes ou itinéraires", "Application de traduction", "Réseaux sociaux ou messagerie", "Prendre des photos", "Autre"],
+    "e3": "E3. Quelle langue avez-vous utilisée pour comprendre les panneaux et les guides du musée aujourd'hui ?",
+    "e3_options": ["Coréen", "Anglais", "Chinois", "Japonais", "Aucune de ces langues (il n'y avait pas de guide dans ma langue)"],
+    "e4": "E4. Avez-vous eu des difficultés à obtenir des informations au musée aujourd'hui ?",
+    "e4_options": ["La langue a rendu la compréhension difficile", "Je ne savais pas où trouver les informations dont j'avais besoin", "Le texte des panneaux était trop petit ou manquait de détails", "Aucune difficulté particulière"]
+  },
+  "sectionF": {
+    "title": "Section F. Ce qui aiderait",
+    "f1": "F1. Avant d'entrer dans les salles d'exposition, que vouliez-vous savoir le plus ?",
+    "f1_sub": "(Maximum 2 choix)",
+    "f1_limit": "Vous pouvez sélectionner jusqu'à 2 choix.",
+    "f1_options": ["Quelles expositions je peux voir", "Un itinéraire recommandé dans le musée", "Combien de temps dure la visite", "Les incontournables à voir absolument", "Les installations telles que les toilettes et les casiers", "Le contexte historique des objets"],
+    "f2": "F2. Si les éléments suivants étaient disponibles sur votre téléphone pendant l'attente, les utiliseriez-vous ?",
+    "f2_options": ["Un aperçu des expositions d'aujourd'hui", "L'histoire derrière les objets clés", "Un itinéraire recommandé pour moi", "Le temps d'attente estimé", "Une introduction à l'histoire et à la culture coréennes", "Je n'utiliserais probablement aucun d'entre eux"],
+    "f3": "F3. L'attente pour entrer ne peut pas être totalement supprimée en raison du nombre de visiteurs. Qu'est-ce qui vous aiderait le plus ?",
+    "f3_options": ["Réduire le temps d'attente lui-même", "Me dire exactement combien de temps je dois attendre", "Avoir quelque chose à regarder ou à lire en attendant", "De meilleurs panneaux et une meilleure signalisation"],
+    "submit": "Soumettre l'enquête",
+    "submitting": "Envoi en cours..."
+  },
+  "screen7": {
+    "thankYou": "Merci pour vos réponses.",
+    "enjoy": "Bonne visite."
+  },
+  "common": {
+    "saving": "Sauvegarde...",
+    "agree": "J'accepte",
+    "disagree": "Je n'accepte pas",
+    "search": "Rechercher un pays..."
+  }
+}

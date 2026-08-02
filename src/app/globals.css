@@ -1,0 +1,32 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+@import "tailwindcss";
+
+:root {
+  --background: #f2f4f6;
+  --foreground: #191f28;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 다국어 폰트 지원 클래스 */
+.font-en { font-family: 'Inter', sans-serif; }
+.font-zh { font-family: 'Noto Sans SC', sans-serif; }
+.font-ja { font-family: 'Noto Sans JP', sans-serif; }
+.font-ko { font-family: 'Pretendard', 'Noto Sans KR', sans-serif; }
+.font-es { font-family: 'Inter', sans-serif; }
+.font-fr { font-family: 'Inter', sans-serif; }
+
+/* 기본 폰트 폴백 */
+body:not(.font-en):not(.font-zh):not(.font-ja):not(.font-ko):not(.font-es):not(.font-fr) {
+  font-family: 'Inter', sans-serif;
+}
+
+input[type="radio"], input[type="checkbox"] {
+  display: none;
+}

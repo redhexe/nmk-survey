@@ -1,0 +1,108 @@
+{
+  "screen0": {
+    "welcome": "Welcome to Our Survey",
+    "intro": "Thank you for visiting\nthe National Museum of Korea.\n\nI am a researcher at the Graduate School\nof Techno Design, Kookmin University.\nThis short survey (about 4 minutes) is part of\nmy study to improve the visit experience\nfor international visitors like you.\n\nAll responses are completely anonymous —\nno personal identifying information is collected.",
+    "consent": "I understand and agree to participate",
+    "instruction": "Please complete this just before you enter the exhibition halls.",
+    "ok": "Start Survey",
+    "selectLanguage": "Please select your language"
+  },
+  "sectionA": {
+    "title": "Section A. About you",
+    "a1": "A1. Which country do you live in?",
+    "a1_placeholder": "Select a country...",
+    "a2": "A2. What is your age group?",
+    "a2_options": ["Under 20", "20s", "30s", "40s", "50s", "60 or older"],
+    "a3": "A3. What is your gender?",
+    "a3_options": ["Male", "Female"],
+    "a4": "A4. Which language do you mainly use in daily life?",
+    "a4_options": ["English", "Chinese", "Japanese", "Korean", "Spanish", "French", "Other (please specify)"],
+    "a4_placeholder": "Please specify",
+    "next": "Next",
+    "back": "Back"
+  },
+  "sectionB": {
+    "title": "Section B. Your visit",
+    "b1": "B1. What brings you to Korea?",
+    "b1_options": ["Travel / tourism", "I live in Korea", "Study / training", "Business", "Other"],
+    "b2": "B2. Is this your first visit to the National Museum of Korea?",
+    "b2_options": ["First visit", "I have been here before"],
+    "b3": "B3. How many people came with you today?",
+    "b3_options": ["Alone", "2 people", "3–4 people", "5 or more"],
+    "b4": "B4. Did you look up information about this museum or its exhibitions before coming?",
+    "b4_options": ["Yes, in detail", "Yes, a little", "No"],
+    "b5": "B5. Did you bring a bag or luggage with you today?",
+    "b5_options": ["A backpack or large bag", "Only a small bag or handbag", "Nothing in particular"]
+  },
+  "sectionC": {
+    "title": "Section C. Your waiting experience today",
+    "c1": "C1. How did the time you spent waiting to enter feel to you?",
+    "c1_options": ["1. Very short", "2. Short", "3. Neutral", "4. Long", "5. Very long"],
+    "c2": "C2. How did you feel while waiting?",
+    "c2_options": ["Bored", "Anxious", "Confused", "Excited", "Relaxed", "Physically uncomfortable (heat, tiredness)"],
+    "c3": "C3. Which part felt the most uncomfortable?",
+    "c3_options": ["Walking from the subway station to the museum", "The outdoor plaza and stairs in front of the museum", "The outdoor queue in front of the building", "The bag security check line", "The long indoor corridor before the exhibition halls", "Nothing felt particularly uncomfortable"],
+    "c5": "C5. How long do you think you actually waited before entering the exhibition halls?",
+    "c5_options": ["Less than 5 minutes", "5–10 minutes", "10–20 minutes", "20–30 minutes", "More than 30 minutes"],
+    "c4": "C4. While waiting, how much do you agree with each statement?",
+    "c4_q": [
+      "1. I understood what the line I was standing in was for",
+      "2. I knew how much longer I had to wait",
+      "3. I knew where I needed to go",
+      "4. The waiting time did not feel boring",
+      "5. The waiting area was comfortable (heat, crowding, seating)",
+      "6. There was something interesting to look at while waiting",
+      "7. The waiting area did not feel cramped",
+      "8. The surrounding noise did not bother me"
+    ],
+    "disagree": "Strongly disagree",
+    "agree": "Strongly agree"
+  },
+  "sectionD": {
+    "title": "Section D. Your expectations right now",
+    "d1": "D1. You are about to see the exhibition. How much do you agree with each statement?",
+    "d1_q": [
+      "1. I am looking forward to seeing the exhibition",
+      "2. I expect today's visit to be enjoyable",
+      "3. I have a clear idea of what I am going to see"
+    ],
+    "d2": "D2. Did the time you spent waiting affect your expectations for the visit?",
+    "d2_options": ["It increased my expectations", "No change", "It lowered my expectations"],
+    "disagree": "Strongly disagree",
+    "agree": "Strongly agree"
+  },
+  "sectionE": {
+    "title": "Section E. Information and behaviour while waiting",
+    "e1": "E1. What did you mainly do while waiting?",
+    "e1_options": ["Looked at my phone", "Talked with my companions", "Looked around", "Read signage", "Picked up a leaflet or map at the entrance", "Nothing in particular", "It was hard to use my phone because of my bags or belongings"],
+    "e2": "E2. If you used your phone, what did you look at?",
+    "e2_options": ["Museum or exhibition information", "Maps or directions", "Translation app", "Social media or messaging", "Taking photos", "Other"],
+    "e3": "E3. Which language did you use to understand the museum's signage and guides today?",
+    "e3_options": ["Korean", "English", "Chinese", "Japanese", "None of these (there was no guidance in my language)"],
+    "e4": "E4. Did you have any difficulty getting information at the museum today?",
+    "e4_options": ["Language made it hard to understand", "I did not know where to find the information I needed", "Signage text was too small or lacked detail", "No particular difficulty"]
+  },
+  "sectionF": {
+    "title": "Section F. What would help",
+    "f1": "F1. Before entering the exhibition halls, what did you most want to know?",
+    "f1_sub": "(Maximum 2 choices)",
+    "f1_limit": "You can select up to 2 choices.",
+    "f1_options": ["What exhibitions I can see", "A recommended route through the museum", "How long a visit takes", "The must-see highlights", "Facilities such as restrooms and lockers", "Historical background of the objects"],
+    "f2": "F2. If the following were available on your phone while waiting, would you use them?",
+    "f2_options": ["A preview of today's exhibitions", "Stories behind key objects", "A route recommended for me", "Estimated waiting time", "Introduction to Korean history and culture", "I probably would not use any of these"],
+    "f3": "F3. Waiting to enter cannot be fully removed because of the number of visitors. Which of the following would help you most?",
+    "f3_options": ["Reducing the waiting time itself", "Telling me exactly how long I need to wait", "Having something to look at or read while waiting", "Better signage and wayfinding"],
+    "submit": "Submit Survey",
+    "submitting": "Submitting..."
+  },
+  "screen7": {
+    "thankYou": "Thank you for your responses.",
+    "enjoy": "Enjoy your visit."
+  },
+  "common": {
+    "saving": "Saving...",
+    "agree": "I agree",
+    "disagree": "I do not agree",
+    "search": "Search country..."
+  }
+}
