@@ -96,7 +96,7 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f8f9fa] p-4 md:p-8 font-sans">
+    <div className="min-h-screen bg-[#f4f7fe] p-4 md:p-8 font-sans">
       <div className="max-w-[1400px] mx-auto">
         <div className="flex justify-between items-center mb-8 pb-6 border-b border-gray-200">
           <div>

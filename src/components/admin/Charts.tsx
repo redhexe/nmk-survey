@@ -92,7 +92,7 @@ export default function Charts({ responses }: { responses: any[] }) {
   return (
     <div className="space-y-6">
       {/* 1열: 가장 중요한 D2 문항 크게 */}
-      <div className="bg-white p-6 rounded-2xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] border border-gray-100 h-96 flex flex-col">
+      <div className="bg-white p-6 rounded-[24px] shadow-sm h-96 flex flex-col">
         <h3 className="text-sm font-semibold text-gray-800 mb-2">D2 기다린 시간이 기대에 영향을 주었습니까?</h3>
         {isEmpty ? <EmptyState /> : (
           <div className="flex-1 min-h-0">
@@ -111,7 +111,7 @@ export default function Charts({ responses }: { responses: any[] }) {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* E1 활동 분포 */}
-        <div className="bg-white p-6 rounded-2xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] border border-gray-100 h-[400px] flex flex-col">
+        <div className="bg-white p-6 rounded-[24px] shadow-sm h-[400px] flex flex-col">
           <h3 className="text-sm font-semibold text-gray-800 mb-2">E1 대기 중 주요 활동 (짐/안내도 강조)</h3>
           {isEmpty ? <EmptyState /> : (
             <div className="flex-1 min-h-0">
@@ -133,7 +133,7 @@ export default function Charts({ responses }: { responses: any[] }) {
         </div>
 
         {/* A4 vs E3 교차 불일치 */}
-        <div className="bg-white p-6 rounded-2xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] border border-gray-100 h-[400px] flex flex-col">
+        <div className="bg-white p-6 rounded-[24px] shadow-sm h-[400px] flex flex-col">
           <h3 className="text-sm font-semibold text-gray-800 mb-4">A4 vs E3 언어 불일치 케이스</h3>
           {isEmpty ? <EmptyState /> : (
             <div className="flex-1 min-h-0 overflow-auto">
@@ -167,7 +167,7 @@ export default function Charts({ responses }: { responses: any[] }) {
         </div>
 
         {/* B2 재방문 */}
-        <div className="bg-white p-6 rounded-2xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] border border-gray-100 h-80 flex flex-col">
+        <div className="bg-white p-6 rounded-[24px] shadow-sm h-80 flex flex-col">
           <h3 className="text-sm font-semibold text-gray-800 mb-2">B2 재방문 여부</h3>
           {isEmpty ? <EmptyState /> : (
             <div className="flex-1 min-h-0">
@@ -187,7 +187,7 @@ export default function Charts({ responses }: { responses: any[] }) {
         </div>
 
         {/* C1 분포 */}
-        <div className="bg-white p-6 rounded-2xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] border border-gray-100 h-80 flex flex-col">
+        <div className="bg-white p-6 rounded-[24px] shadow-sm h-80 flex flex-col">
           <h3 className="text-sm font-semibold text-gray-800 mb-2">C1 체감 대기 시간 분포</h3>
           {isEmpty ? <EmptyState /> : (
             <div className="flex-1 min-h-0">

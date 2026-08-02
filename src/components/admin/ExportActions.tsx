@@ -42,7 +42,7 @@ export default function ExportActions({ responses, onDataChanged }: { responses:
   };
 
   return (
-    <div className="flex flex-col md:flex-row gap-6 p-5 bg-white rounded-2xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] border border-gray-100">
+    <div className="flex flex-col md:flex-row gap-6 p-5 bg-white rounded-[24px] shadow-sm">
       <div className="flex-1">
         <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
           <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>

@@ -55,7 +55,7 @@ export default function ResponseTable({ responses }: { responses: any[] }) {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] border border-gray-100 overflow-hidden">
+    <div className="bg-white rounded-[24px] shadow-sm overflow-hidden">
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-100 text-sm">
           <thead className="bg-gray-50/50">
