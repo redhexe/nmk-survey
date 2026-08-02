@@ -17,7 +17,22 @@ export default function SurveyApp() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const existingSession = localStorage.getItem('survey_session_id');
+    const urlParams = new URLSearchParams(window.location.search);
+    const isTestUrl = urlParams.get('test') === '1';
+    const storedIsTest = localStorage.getItem('survey_is_test') === 'true';
+
+    let existingSession = localStorage.getItem('survey_session_id');
+    
+    // 만약 URL의 테스트 여부와 저장된 세션의 테스트 여부가 다르면 (예: 일반 접속하다가 ?test=1 로 들어온 경우)
+    // 기존 세션을 초기화해서 새로운 테스트 세션이 발급되도록 강제합니다.
+    if (existingSession && isTestUrl !== storedIsTest) {
+      localStorage.removeItem('survey_session_id');
+      localStorage.removeItem('survey_scan_at');
+      localStorage.removeItem('survey_section_timestamps');
+      localStorage.removeItem('survey_is_test');
+      existingSession = null;
+    }
+
     if (existingSession) {
       setSessionId(existingSession);
       if (!localStorage.getItem('survey_section_timestamps')) {
@@ -53,6 +68,7 @@ export default function SurveyApp() {
           localStorage.setItem('survey_session_id', newSessionId);
           localStorage.setItem('survey_scan_at', scanAt);
           localStorage.setItem('survey_section_timestamps', '{}');
+          localStorage.setItem('survey_is_test', isTest ? 'true' : 'false');
           setSessionId(newSessionId);
           setStep(0);
         } catch (err) {
