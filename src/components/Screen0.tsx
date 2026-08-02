@@ -44,7 +44,7 @@ export default function Screen0({ sessionId, onNext }: Screen0Props) {
   };
 
   return (
-    <div className="min-h-[100dvh] flex flex-col max-w-md mx-auto relative bg-white pb-40">
+    <div className="min-h-[100dvh] flex flex-col w-full max-w-md mx-auto relative bg-white pb-40">
       <div className="p-6 flex-1 flex flex-col justify-start pt-2">
         
         <div className="text-center mb-1 text-[#999999] text-[12px] font-medium leading-relaxed">
@@ -56,7 +56,7 @@ export default function Screen0({ sessionId, onNext }: Screen0Props) {
           <img src="/logo.png" alt="Kookmin University Logo" className="h-11 object-contain" />
         </div>
 
-        <div className="h-[360px] flex flex-col justify-start mb-8">
+        <div className="flex flex-col mb-8">
           <h1 className="text-2xl font-bold text-[#191f28] text-center mb-5 leading-tight">
             {t.welcome}
           </h1>
