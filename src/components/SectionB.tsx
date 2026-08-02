@@ -105,7 +105,6 @@ export default function SectionB({ sessionId, onNext, onPrev }: SectionProps) {
         <SelectionGroup question={t.b5} options={t.b5_options} enOptions={enBase.b5_options} value={b5} onChange={setB5} />
 
       </div>
-      </div>
       <div ref={bottomRef} className="h-1" />
       <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white border-t border-gray-100 z-10">
         {showWarning && (

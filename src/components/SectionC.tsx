@@ -213,7 +213,6 @@ export default function SectionC({ sessionId, onNext, onPrev }: SectionProps) {
         </div>
 
       </div>
-      </div>
       <div ref={bottomRef} className="h-1" />
       <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white border-t border-gray-100 z-10">
         {showWarning && (
