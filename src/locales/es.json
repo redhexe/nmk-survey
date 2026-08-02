@@ -1,7 +1,7 @@
 {
   "screen0": {
-    "welcome": "Bienvenido a nuestra encuesta",
-    "intro": "Gracias por visitar\nel Museo Nacional de Corea.\n\nSoy investigador/a de la Escuela de Posgrado\nen Diseño Tecnológico\nde la Universidad Kookmin.\nEsta breve encuesta (unos 4 minutos)\nforma parte de un estudio para mejorar\nla experiencia de los visitantes\ninternacionales como usted.\n\nTodas las respuestas son completamente\nanónimas — no se recopila ninguna\ninformación personal identificable.",
+    "welcome": "Encuesta de experiencia del visitante",
+    "intro": "<div class=\"mb-3\">Gracias por visitar<br>el Museo Nacional de Corea.</div><div class=\"mb-3\">Soy investigador/a de la Escuela de Posgrado<br>en Diseño Tecnológico<br>de la Universidad Kookmin.<br>Esta breve encuesta (<strong>unos 4 minutos</strong>)<br>forma parte de un estudio para mejorar<br>la experiencia de los visitantes<br>internacionales como usted.</div><div class=\"mb-3\">Todas las respuestas son <strong>completamente<br>anónimas</strong> — no se recopila ninguna<br>información personal identificable.</div>",
     "consent": "Comprendo y acepto participar",
     "instruction": "Por favor, complete esta encuesta justo antes de entrar a las salas de exposición.",
     "ok": "Iniciar encuesta",

@@ -45,15 +45,15 @@ export default function Screen0({ sessionId, onNext }: Screen0Props) {
 
   return (
     <div className="min-h-screen flex flex-col max-w-md mx-auto relative bg-white pb-40">
-      <div className="p-6 flex-1 flex flex-col justify-start pt-16">
+      <div className="p-6 flex-1 flex flex-col justify-start pt-2">
         
-        <div className="text-center mb-6 text-[#999999] text-[12px] font-medium leading-relaxed">
+        <div className="text-center mb-1 text-[#999999] text-[12px] font-medium leading-relaxed">
           본 설문은 외국인 관람객을 대상으로 하는 연구 설문입니다.<br/>
           This survey is for international visitors only.
         </div>
 
         <div className="flex justify-center mb-8">
-          <img src="/logo.png" alt="Kookmin University Logo" className="h-16 object-contain" />
+          <img src="/logo.png" alt="Kookmin University Logo" className="h-11 object-contain" />
         </div>
 
         <div className="min-h-[360px] flex flex-col justify-start">
@@ -61,9 +61,10 @@ export default function Screen0({ sessionId, onNext }: Screen0Props) {
             {t.welcome}
           </h1>
 
-          <p className="text-[#4e5968] text-[16px] font-normal text-center leading-[1.6] whitespace-pre-wrap px-2">
-            {t.intro}
-          </p>
+          <div 
+            className="text-[#4e5968] text-[15px] font-normal text-center leading-[1.6] px-2"
+            dangerouslySetInnerHTML={{ __html: t.intro }}
+          />
         </div>
         
         <div className="bg-[#f2f4f6] rounded-3xl p-6 mb-6">

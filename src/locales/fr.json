@@ -1,7 +1,7 @@
 {
   "screen0": {
-    "welcome": "Bienvenue dans notre enquête",
-    "intro": "Merci de votre visite\nau Musée national de Corée.\n\nJe suis chercheur/chercheuse à l'École\nsupérieure de design technologique\nde l'Université Kookmin.\nCe court questionnaire (environ 4 minutes)\ns'inscrit dans une étude visant à améliorer\nl'expérience des visiteurs\ninternationaux comme vous.\n\nToutes les réponses sont entièrement\nanonymes — aucune information personnelle\nidentifiable n'est collectée.",
+    "welcome": "Enquête sur l'expérience des visiteurs",
+    "intro": "<div class=\"mb-3\">Merci de votre visite<br>au Musée national de Corée.</div><div class=\"mb-3\">Je suis chercheur/chercheuse à l'École<br>supérieure de design technologique<br>de l'Université Kookmin.<br>Ce court questionnaire (<strong>environ 4 minutes</strong>)<br>s'inscrit dans une étude visant à améliorer<br>l'expérience des visiteurs<br>internationaux comme vous.</div><div class=\"mb-3\">Toutes les réponses sont <strong>entièrement<br>anonymes</strong> — aucune information personnelle<br>identifiable n'est collectée.</div>",
     "consent": "Je comprends et j'accepte de participer",
     "instruction": "Veuillez remplir ce questionnaire juste avant d'entrer dans les salles d'exposition.",
     "ok": "Commencer le questionnaire",

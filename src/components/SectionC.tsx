@@ -24,9 +24,9 @@ const RatingMatrix = ({ question, value, onChange, minText, maxText }: any) => (
         </button>
       ))}
     </div>
-    <div className="flex justify-between px-2 text-[12px] text-[#8b95a1] font-bold uppercase tracking-wider">
-      <span>{minText}</span>
-      <span>{maxText}</span>
+    <div className="flex justify-between text-[10px] text-[#AAAAAA] font-bold mt-1 px-1">
+      <span className="text-left w-20 leading-tight">{minText}</span>
+      <span className="text-right w-20 leading-tight">{maxText}</span>
     </div>
   </div>
 );
