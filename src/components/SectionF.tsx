@@ -43,12 +43,26 @@ export default function SectionF({ sessionId, onNext, onPrev }: SectionProps) {
 
   const handleNext = async () => {
     setIsSaving(true);
+    const timestamps = JSON.parse(localStorage.getItem('survey_section_timestamps') || '{}');
+    const submittedAt = new Date().toISOString();
+    timestamps['F'] = submittedAt;
+    localStorage.setItem('survey_section_timestamps', JSON.stringify(timestamps));
+    
+    // Calculate duration_seconds from scan_at
+    const scanAt = localStorage.getItem('survey_scan_at');
+    let durationSeconds: number | null = null;
+    if (scanAt) {
+      durationSeconds = Math.round((new Date(submittedAt).getTime() - new Date(scanAt).getTime()) / 1000);
+    }
+
     await supabase.from('responses').update({ 
       f1_wanted_info: f1.length > 0 ? f1 : null,
       f2_would_use: f2.length > 0 ? f2 : null,
       f3_priority: f3 || null,
       is_complete: true,
-      submitted_at: new Date().toISOString()
+      submitted_at: submittedAt,
+      duration_seconds: durationSeconds,
+      section_timestamps: timestamps
     }).eq('session_id', sessionId);
     setIsSaving(false);
     onNext();

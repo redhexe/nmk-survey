@@ -48,11 +48,15 @@ export default function SectionE({ sessionId, onNext, onPrev }: SectionProps) {
 
   const handleNext = async () => {
     setIsSaving(true);
+    const timestamps = JSON.parse(localStorage.getItem('survey_section_timestamps') || '{}');
+    timestamps['E'] = new Date().toISOString();
+    localStorage.setItem('survey_section_timestamps', JSON.stringify(timestamps));
     await supabase.from('responses').update({ 
       e1_activities: e1.length > 0 ? e1 : null,
       e2_phone_content: showE2 && e2.length > 0 ? e2 : [], // if not shown or empty, empty array
       e3_signage_language: e3 || null,
-      e4_difficulties: e4.length > 0 ? e4 : null
+      e4_difficulties: e4.length > 0 ? e4 : null,
+      section_timestamps: timestamps
     }).eq('session_id', sessionId);
     setIsSaving(false);
     onNext();

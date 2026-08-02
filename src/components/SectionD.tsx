@@ -64,9 +64,13 @@ export default function SectionD({ sessionId, onNext, onPrev }: SectionProps) {
 
   const handleNext = async () => {
     setIsSaving(true);
+    const timestamps = JSON.parse(localStorage.getItem('survey_section_timestamps') || '{}');
+    timestamps['D'] = new Date().toISOString();
+    localStorage.setItem('survey_section_timestamps', JSON.stringify(timestamps));
     await supabase.from('responses').update({ 
       d1_1, d1_2, d1_3,
-      d2_expectation_change: d2 || null
+      d2_expectation_change: d2 || null,
+      section_timestamps: timestamps
     }).eq('session_id', sessionId);
     setIsSaving(false);
     onNext();

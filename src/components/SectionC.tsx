@@ -73,13 +73,17 @@ export default function SectionC({ sessionId, onNext, onPrev }: SectionProps) {
 
   const handleNext = async () => {
     setIsSaving(true);
+    const timestamps = JSON.parse(localStorage.getItem('survey_section_timestamps') || '{}');
+    timestamps['C'] = new Date().toISOString();
+    localStorage.setItem('survey_section_timestamps', JSON.stringify(timestamps));
     await supabase.from('responses').update({ 
       c1_perceived_wait: c1,
       c2_feelings: c2.length > 0 ? c2 : null,
       c3_worst_section: c3 || null,
       c5_estimated_wait: c5 || null,
       c4_1: c4_1, c4_2: c4_2, c4_3: c4_3, c4_4: c4_4,
-      c4_5: c4_5, c4_6: c4_6, c4_7: c4_7, c4_8: c4_8
+      c4_5: c4_5, c4_6: c4_6, c4_7: c4_7, c4_8: c4_8,
+      section_timestamps: timestamps
     }).eq('session_id', sessionId);
     setIsSaving(false);
     onNext();

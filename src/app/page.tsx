@@ -20,6 +20,9 @@ export default function SurveyApp() {
     const existingSession = localStorage.getItem('survey_session_id');
     if (existingSession) {
       setSessionId(existingSession);
+      if (!localStorage.getItem('survey_section_timestamps')) {
+        localStorage.setItem('survey_section_timestamps', '{}');
+      }
       setStep(0);
     } else {
       const initSession = async () => {
@@ -34,12 +37,22 @@ export default function SurveyApp() {
           });
         };
         const newSessionId = generateUUID();
+        const scanAt = new Date().toISOString();
+        const urlParams = new URLSearchParams(window.location.search);
+        const isTest = urlParams.get('test') === '1';
         try {
           const { error: dbError } = await supabase.from('responses').insert([
-            { session_id: newSessionId, scan_at: new Date().toISOString() }
+            { 
+              session_id: newSessionId, 
+              scan_at: scanAt,
+              user_agent: navigator.userAgent,
+              is_test: isTest
+            }
           ]);
           if (dbError) throw dbError;
           localStorage.setItem('survey_session_id', newSessionId);
+          localStorage.setItem('survey_scan_at', scanAt);
+          localStorage.setItem('survey_section_timestamps', '{}');
           setSessionId(newSessionId);
           setStep(0);
         } catch (err) {

@@ -46,12 +46,16 @@ export default function SectionA({ sessionId, onNext, onPrev }: SectionProps) {
 
   const handleNext = async () => {
     setIsSaving(true);
+    const timestamps = JSON.parse(localStorage.getItem('survey_section_timestamps') || '{}');
+    timestamps['A'] = new Date().toISOString();
+    localStorage.setItem('survey_section_timestamps', JSON.stringify(timestamps));
     await supabase.from('responses').update({ 
       a1_country: a1.value, 
       a2_age: a2 || null, 
       a3_gender: a3 || null, 
       a4_language: a4 || null, 
-      a4_language_other: a4 === enBase.a4_options[6] ? a4Other : null 
+      a4_language_other: a4 === enBase.a4_options[6] ? a4Other : null,
+      section_timestamps: timestamps
     }).eq('session_id', sessionId);
     setIsSaving(false);
     onNext();
