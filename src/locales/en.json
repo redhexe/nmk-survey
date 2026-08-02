@@ -1,7 +1,7 @@
 {
   "screen0": {
     "welcome": "Visitor Experience Survey",
-    "intro": "<div class=\"mb-3\">Thank you for visiting<br>the National Museum of Korea.</div><div class=\"mb-3\">I am a researcher at the Graduate School<br>of Techno Design, Kookmin University.<br>This short survey is part of my study<br>to improve the visit experience<br>for international visitors.</div><div class=\"mb-3\">It takes only <strong>about 4 minutes</strong> and all responses<br>are <strong>completely anonymous</strong> — no personal identifying<br>information is collected.</div>",
+    "intro": "<div class=\"mb-3\">Thank you for visiting<br>the National Museum of Korea.</div><div class=\"mb-3\">I am a researcher at the Graduate School<br>of Techno Design, Kookmin University.<br>This short survey is part of my study<br>to improve the visit experience<br>for international visitors.</div><div class=\"mb-3\">It takes only <strong>about 4 minutes</strong><br>and all responses are <strong>completely anonymous</strong><br>— no personal identifying information is collected.</div>",
     "consent": "I understand and agree to participate",
     "instruction": "Please complete this just before you enter the exhibition halls.",
     "ok": "Start Survey",
