@@ -88,7 +88,7 @@ export default function SectionB({ sessionId, onNext, onPrev }: SectionProps) {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col max-w-md mx-auto relative pb-28">
+    <div className="min-h-[100dvh] bg-white flex flex-col max-w-md mx-auto relative pb-28">
       <div className="pt-4 pb-2 px-6 flex items-center justify-between">
         <button onClick={onPrev} className="text-[#4e5968] font-medium p-2 -ml-2 hover:text-[#191f28]">← {ta.back}</button>
         <span className="text-[#8b95a1] font-bold bg-[#f2f4f6] px-3 py-1 rounded-full text-sm">2 / 6</span>
