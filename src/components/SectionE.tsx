@@ -67,7 +67,8 @@ export default function SectionE({ sessionId, onNext, onPrev }: SectionProps) {
 
         {/* E1 (Multiple) */}
         <div>
-          <h2 className="text-[19px] font-bold text-[#191f28] mb-4">{t.e1}</h2>
+          <h2 className="text-[19px] font-bold text-[#191f28] mb-1">{t.e1}</h2>
+          <p className="text-[#8b95a1] text-[14px] mb-4 font-normal">{tc.multiple_select}</p>
           <div className="flex flex-col gap-3">
             {t.e1_options.map((opt: string, i: number) => {
               const baseValue = enBase.e1_options[i];
@@ -88,7 +89,8 @@ export default function SectionE({ sessionId, onNext, onPrev }: SectionProps) {
         {/* E2 (Multiple, Conditional) */}
         {showE2 && (
           <div className="animate-in fade-in slide-in-from-top-4 duration-300">
-            <h2 className="text-[19px] font-bold text-[#191f28] mb-4">{t.e2}</h2>
+            <h2 className="text-[19px] font-bold text-[#191f28] mb-1">{t.e2}</h2>
+            <p className="text-[#8b95a1] text-[14px] mb-4 font-normal">{tc.multiple_select}</p>
             <div className="flex flex-wrap gap-2">
               {t.e2_options.map((opt: string, i: number) => {
                 const baseValue = enBase.e2_options[i];
@@ -128,7 +130,8 @@ export default function SectionE({ sessionId, onNext, onPrev }: SectionProps) {
 
         {/* E4 (Multiple) */}
         <div>
-          <h2 className="text-[19px] font-bold text-[#191f28] mb-4">{t.e4}</h2>
+          <h2 className="text-[19px] font-bold text-[#191f28] mb-1">{t.e4}</h2>
+          <p className="text-[#8b95a1] text-[14px] mb-4 font-normal">{tc.multiple_select}</p>
           <div className="flex flex-col gap-3">
             {t.e4_options.map((opt: string, i: number) => {
               const baseValue = enBase.e4_options[i];

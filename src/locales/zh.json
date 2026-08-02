@@ -102,7 +102,8 @@
   "common": {
     "saving": "保存中...",
     "agree": "我同意",
-    "disagree": "我不同意",
-    "search": "搜索国家..."
+    "disagree": "不同意",
+    "search": "搜索国家...",
+    "multiple_select": "(可多选)"
   }
 }

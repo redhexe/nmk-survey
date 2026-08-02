@@ -103,6 +103,7 @@
     "saving": "保存中...",
     "agree": "同意する",
     "disagree": "同意しない",
-    "search": "国を検索..."
+    "search": "国を検索...",
+    "multiple_select": "(複数選択可)"
   }
 }

@@ -117,7 +117,8 @@ export default function SectionC({ sessionId, onNext, onPrev }: SectionProps) {
 
         {/* C2 (Multiple) */}
         <div>
-          <h2 className="text-[19px] font-bold text-[#191f28] mb-4">{t.c2}</h2>
+          <h2 className="text-[19px] font-bold text-[#191f28] mb-1">{t.c2}</h2>
+          <p className="text-[#8b95a1] text-[14px] mb-4 font-normal">{tc.multiple_select}</p>
           <div className="flex flex-wrap gap-2">
             {t.c2_options.map((opt: string, i: number) => {
               const baseValue = enBase.c2_options[i];

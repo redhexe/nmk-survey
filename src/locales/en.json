@@ -103,6 +103,7 @@
     "saving": "Saving...",
     "agree": "I agree",
     "disagree": "I do not agree",
-    "search": "Search country..."
+    "search": "Search country...",
+    "multiple_select": "(Multiple selections possible)"
   }
 }

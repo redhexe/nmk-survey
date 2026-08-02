@@ -96,7 +96,8 @@ export default function SectionF({ sessionId, onNext, onPrev }: SectionProps) {
 
         {/* F2 (Multiple) */}
         <div>
-          <h2 className="text-[19px] font-bold text-[#191f28] mb-4">{t.f2}</h2>
+          <h2 className="text-[19px] font-bold text-[#191f28] mb-1">{t.f2}</h2>
+          <p className="text-[#8b95a1] text-[14px] mb-4 font-normal">{tc.multiple_select}</p>
           <div className="flex flex-col gap-3">
             {t.f2_options.map((opt: string, i: number) => {
               const baseValue = enBase.f2_options[i];
