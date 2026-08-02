@@ -24,9 +24,9 @@ const RatingMatrix = ({ question, value, onChange, minText, maxText }: any) => (
         </button>
       ))}
     </div>
-    <div className="flex justify-between text-[10px] text-[#AAAAAA] font-bold mt-1 px-1">
-      <span className="text-left w-20 leading-tight">{minText}</span>
-      <span className="text-right w-20 leading-tight">{maxText}</span>
+    <div className="flex justify-between px-4 text-[10px] text-[#AAAAAA] font-bold mt-1">
+      <span className="text-center w-[64px] -ml-[10px] leading-[1.2] whitespace-pre-line break-keep">{minText.replace(' ', '\n')}</span>
+      <span className="text-center w-[64px] -mr-[10px] leading-[1.2] whitespace-pre-line break-keep">{maxText.replace(' ', '\n')}</span>
     </div>
   </div>
 );
