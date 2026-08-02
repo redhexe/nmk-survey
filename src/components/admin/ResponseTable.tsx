@@ -97,7 +97,12 @@ export default function ResponseTable({ responses }: { responses: any[] }) {
                       {new Date(r.created_at).toLocaleString('ko-KR')}
                     </td>
                     <td className="px-6 py-4 text-gray-600 font-medium">
-                      {r.duration_seconds ? <span className="px-2 py-1 bg-gray-100 rounded-md text-xs">{r.duration_seconds}s</span> : <span className="text-gray-300">-</span>}
+                      {r.duration_seconds ? (
+                        <span className="px-2 py-1 bg-gray-100 rounded-md text-xs whitespace-nowrap">
+                          {Math.floor(r.duration_seconds / 60) > 0 ? `${Math.floor(r.duration_seconds / 60)}분 ` : ''}
+                          {r.duration_seconds % 60}초
+                        </span>
+                      ) : <span className="text-gray-300">-</span>}
                     </td>
                     <td className="px-6 py-4">
                       {r.is_complete ? (

@@ -9,6 +9,12 @@ export default function Screen7() {
   useEffect(() => { 
     setLang(localStorage.getItem('survey_lang') || 'en'); 
     window.scrollTo(0, 0);
+
+    // 설문이 완료되었으므로 다음 참여자를 위해 로컬 스토리지 초기화
+    localStorage.removeItem('survey_session_id');
+    localStorage.removeItem('survey_scan_at');
+    localStorage.removeItem('survey_section_timestamps');
+    localStorage.removeItem('survey_is_test');
   }, []);
 
   const t = translations[lang]?.screen7 || translations['en'].screen7;
