@@ -140,7 +140,7 @@ export default function AdminPage() {
                 </h2>
                 <div className="text-xs text-gray-500 bg-white px-3 py-2 rounded-xl shadow-sm border border-gray-100 flex gap-4">
                   <div>
-                    <span className="font-bold text-gray-400 mr-1">○</span>일치
+                    <span className="font-bold text-green-500 mr-1">○</span>일치
                     <span className="font-bold text-red-500 ml-2 mr-1">✕</span>불일치
                     <span className="text-[10px] text-gray-400 ml-1">(평소 언어와 안내문 언어)</span>
                   </div>

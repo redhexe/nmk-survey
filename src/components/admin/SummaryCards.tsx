@@ -155,7 +155,12 @@ export default function SummaryCards({ responses }: { responses: any[] }) {
         </div>
         <div>
           <p className="text-3xl font-bold text-[#191f28] mb-1">{mismatchRate}<span className="text-lg text-[#8b95a1] mx-0.5">%</span> <span className="text-sm font-medium text-[#8b95a1] ml-1">({mismatchCount}명)</span></p>
-          <p className="text-[13px] font-medium text-[#8b95a1]">언어 불일치 비율 (A4≠E3)</p>
+          <div className="group relative inline-block">
+            <p className="text-[13px] font-medium text-[#8b95a1] border-b border-dashed border-[#8b95a1] cursor-help">정보접근 불일치율</p>
+            <div className="absolute bottom-full left-0 mb-2 hidden w-48 p-2 bg-gray-800 text-white text-xs rounded-lg shadow-lg group-hover:block z-10">
+              평소 언어(A4) ≠ 안내문 언어(E3)인 응답 비율
+            </div>
+          </div>
         </div>
       </div>
     </div>

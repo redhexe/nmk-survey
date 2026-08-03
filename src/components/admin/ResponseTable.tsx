@@ -100,7 +100,12 @@ export default function ResponseTable({ responses }: { responses: any[] }) {
               <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">최종 도달</th>
               <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">설문 언어</th>
               <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">국적</th>
-              <th className="px-6 py-4 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider">A4≠E3</th>
+              <th 
+                className="px-6 py-4 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider cursor-help border-b border-dashed border-gray-400"
+                title="평소 언어(A4)와 안내문 언어(E3) 일치 여부"
+              >
+                정보접근
+              </th>
               <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">유효성 태그</th>
               <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">세부 보기</th>
             </tr>
@@ -163,7 +168,7 @@ export default function ResponseTable({ responses }: { responses: any[] }) {
                         (r.e3_signage_language === 'None of these (there was no guidance in my language)' || r.a4_language !== r.e3_signage_language) ? (
                           <span className="text-red-500 font-bold">✕</span>
                         ) : (
-                          <span className="text-gray-400 font-bold">○</span>
+                          <span className="text-green-500 font-bold">○</span>
                         )
                       ) : (
                         <span className="text-gray-300">-</span>
