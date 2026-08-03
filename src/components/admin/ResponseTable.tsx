@@ -1,5 +1,15 @@
 'use client';
 import React, { useState } from 'react';
+import isoCountries from 'i18n-iso-countries';
+import koCountries from 'i18n-iso-countries/langs/ko.json';
+
+isoCountries.registerLocale(koCountries);
+
+const getKoreanCountryName = (code: string) => {
+  if (!code) return '-';
+  const name = isoCountries.getName(code, 'ko');
+  return name || code;
+};
 
 export default function ResponseTable({ responses }: { responses: any[] }) {
   const [expandedRow, setExpandedRow] = useState<string | null>(null);
@@ -146,7 +156,7 @@ export default function ResponseTable({ responses }: { responses: any[] }) {
                       </div>
                     </td>
                     <td className="px-6 py-4 text-xs font-medium text-gray-600">
-                      {r.a1_country || '-'}
+                      {getKoreanCountryName(r.a1_country)}
                     </td>
                     <td className="px-6 py-4 text-center">
                       {r.a4_language && r.e3_signage_language ? (
