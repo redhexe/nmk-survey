@@ -9,6 +9,11 @@ export default function ResponseTable({ responses }: { responses: any[] }) {
     const tags = [];
     if (r.is_test) tags.push({ label: '테스트 데이터', color: 'bg-gray-500' });
     
+    // 미시작 검사 (빈 껍데기)
+    if (r.language === null && (!r.section_timestamps || Object.keys(r.section_timestamps).length === 0)) {
+      tags.push({ label: '미시작', color: 'bg-gray-400' });
+    }
+    
     // 장시간 / 단시간
     if (typeof r.duration_seconds === 'number') {
       if (r.duration_seconds > 5400) tags.push({ label: '장시간(90분+)', color: 'bg-yellow-500' });

@@ -3,10 +3,12 @@ import { Scan, CheckCircle2, Percent, Clock, CalendarDays, AlertTriangle, Langua
 export default function SummaryCards({ responses }: { responses: any[] }) {
   // 테스트 데이터 제외 (실제 데이터만 계산)
   const validResponses = responses.filter(r => !r.is_test);
+  // 미시작 제외 (language가 없고 section_timestamps가 비어있는 경우)
+  const consentedResponses = validResponses.filter(r => !(r.language === null && (!r.section_timestamps || Object.keys(r.section_timestamps).length === 0)));
 
-  const totalScans = validResponses.length;
-  const completedResponses = validResponses.filter(r => r.is_complete).length;
-  const completionRate = totalScans > 0 ? Math.round((completedResponses / totalScans) * 100) : 0;
+  const totalConsents = consentedResponses.length;
+  const completedResponses = consentedResponses.filter(r => r.is_complete).length;
+  const completionRate = totalConsents > 0 ? Math.round((completedResponses / totalConsents) * 100) : 0;
 
   // 평균 소요 시간 (완료된 응답 기준)
   const completedWithDuration = validResponses.filter(r => r.is_complete && typeof r.duration_seconds === 'number');
@@ -70,8 +72,8 @@ export default function SummaryCards({ responses }: { responses: any[] }) {
           <span className="bg-[#4f46e5] text-indigo-100 text-xs font-semibold px-2.5 py-1 rounded-full border border-indigo-400/30">Total</span>
         </div>
         <div>
-          <p className="text-3xl font-bold mb-1">{totalScans}</p>
-          <p className="text-[13px] font-medium text-indigo-200">총 스캔 수 (유효)</p>
+          <p className="text-3xl font-bold mb-1">{totalConsents}</p>
+          <p className="text-[13px] font-medium text-indigo-200">동의 응답 수</p>
         </div>
       </div>
 

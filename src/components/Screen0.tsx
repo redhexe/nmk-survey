@@ -34,10 +34,28 @@ export default function Screen0({ sessionId, onNext }: Screen0Props) {
     if (!consent) return;
     
     setIsSaving(true);
-    await supabase
+    const scanAt = localStorage.getItem('survey_scan_at') || new Date().toISOString();
+    const isTest = localStorage.getItem('survey_is_test') === 'true';
+
+    const { error } = await supabase
       .from('responses')
-      .update({ language: lang, consent })
-      .eq('session_id', sessionId);
+      .insert({ 
+        session_id: sessionId,
+        scan_at: scanAt,
+        user_agent: navigator.userAgent,
+        is_test: isTest,
+        language: lang, 
+        consent,
+        section_timestamps: {}
+      });
+
+    // 23505 is unique violation (already exists)
+    if (error && error.code === '23505') {
+      await supabase
+        .from('responses')
+        .update({ language: lang, consent })
+        .eq('session_id', sessionId);
+    }
       
     setIsSaving(false);
     onNext();

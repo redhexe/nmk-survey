@@ -56,15 +56,6 @@ export default function SurveyApp() {
         const urlParams = new URLSearchParams(window.location.search);
         const isTest = urlParams.get('test') === '1';
         try {
-          const { error: dbError } = await supabase.from('responses').insert([
-            { 
-              session_id: newSessionId, 
-              scan_at: scanAt,
-              user_agent: navigator.userAgent,
-              is_test: isTest
-            }
-          ]);
-          if (dbError) throw dbError;
           localStorage.setItem('survey_session_id', newSessionId);
           localStorage.setItem('survey_scan_at', scanAt);
           localStorage.setItem('survey_section_timestamps', '{}');
