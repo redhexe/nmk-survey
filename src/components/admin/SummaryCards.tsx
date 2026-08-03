@@ -1,4 +1,4 @@
-import { Scan, CheckCircle2, Percent, Clock, CalendarDays, AlertTriangle, Languages } from 'lucide-react';
+import { Scan, CheckCircle2, Percent, Clock, CalendarDays, AlertTriangle, Search } from 'lucide-react';
 
 export default function SummaryCards({ responses }: { responses: any[] }) {
   // 테스트 데이터 제외 (실제 데이터만 계산)
@@ -149,7 +149,7 @@ export default function SummaryCards({ responses }: { responses: any[] }) {
       <div className="bg-white p-6 rounded-[24px] shadow-sm flex flex-col justify-between border border-[#f2f4f6] hover:-translate-y-1 transition-transform col-span-2 md:col-span-1">
         <div className="flex items-start justify-between mb-6">
           <div className="bg-[#f2f4f6] text-[#3182f6] p-2.5 rounded-2xl">
-            <Languages className="w-5 h-5" strokeWidth={2.5} />
+            <Search className="w-5 h-5" strokeWidth={2.5} />
           </div>
           <span className="bg-[#f2f4f6] text-[#8b95a1] text-xs font-bold px-2.5 py-1 rounded-full">Mismatch</span>
         </div>
