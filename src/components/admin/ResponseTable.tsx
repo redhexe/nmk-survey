@@ -4,6 +4,14 @@ import React, { useState } from 'react';
 export default function ResponseTable({ responses }: { responses: any[] }) {
   const [expandedRow, setExpandedRow] = useState<string | null>(null);
 
+  const langMap: Record<string, string> = {
+    en: '🇬🇧 English',
+    es: '🇪🇸 Español',
+    zh: '🇨🇳 中文',
+    ja: '🇯🇵 日本語',
+    fr: '🇫🇷 Français'
+  };
+
   // 유효성 검사 함수
   const getValidityTags = (r: any) => {
     const tags = [];
@@ -130,8 +138,8 @@ export default function ResponseTable({ responses }: { responses: any[] }) {
                       {lastSection !== '-' ? <span className="font-semibold text-gray-600 bg-gray-100 px-2 py-1 rounded-md text-xs">{lastSection}</span> : <span className="text-gray-300">-</span>}
                     </td>
                     <td className="px-6 py-4">
-                      <div className="flex items-center gap-2 uppercase text-gray-600 font-semibold text-xs tracking-wider">
-                        {r.language || '-'}
+                      <div className="flex items-center gap-2 text-gray-600 font-semibold text-xs tracking-wider">
+                        {r.language ? langMap[r.language.toLowerCase()] || r.language.toUpperCase() : '-'}
                         {isLangMismatch && <span title="A4와 E3 언어 불일치" className="text-red-500 text-[16px]">⚠️</span>}
                       </div>
                     </td>

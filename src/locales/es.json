@@ -90,7 +90,7 @@
     "f1_options": ["Qué exposiciones puedo ver", "Una ruta recomendada por el museo", "Cuánto tiempo dura la visita", "Lo más destacado que no me puedo perder", "Instalaciones como baños y taquillas", "El contexto histórico de los objetos"],
     "f2": "F2. Si lo siguiente estuviera disponible en su teléfono mientras espera, ¿lo usaría?",
     "f2_options": ["Un adelanto de las exposiciones de hoy", "Historias detrás de objetos clave", "Una ruta recomendada para mí", "Tiempo de espera estimado", "Introducción a la historia y cultura coreanas", "Probablemente no usaría nada de esto"],
-    "f3": "F3. La espera para entrar no se puede eliminar por completo debido a la cantidad de visitantes. ¿Cuál de lo siguiente le ayudaría más?",
+    "f3": "F3. La espera para ingresar no se puede evitar por completo debido a la cantidad de visitantes. ¿Cuál de lo siguiente le ayudaría más?",
     "f3_options": ["Reducir el tiempo de espera en sí", "Que me digan exactamente cuánto tiempo debo esperar", "Tener algo que mirar o leer mientras espero", "Mejores letreros y orientación"],
     "submit": "Enviar Encuesta",
     "submitting": "Enviando..."
