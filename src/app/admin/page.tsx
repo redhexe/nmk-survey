@@ -131,7 +131,18 @@ export default function AdminPage() {
             </div>
 
             <div className="mt-8">
-              <h2 className="text-lg font-bold mb-4 text-gray-900 tracking-tight">응답 목록 전체 <span className="text-sm font-normal text-gray-500 ml-2">(테스트 포함)</span></h2>
+              <div className="flex flex-col md:flex-row md:items-end justify-between mb-4 gap-2">
+                <h2 className="text-lg font-bold text-gray-900 tracking-tight">
+                  응답 목록 전체 
+                  <span className="text-sm font-normal text-gray-500 ml-2">
+                    (총 {responses.length}건 | 실제 {responses.filter((r: any) => !r.is_test).length}건 | 테스트 {responses.filter((r: any) => r.is_test).length}건)
+                  </span>
+                </h2>
+                <div className="text-xs text-gray-500 bg-white px-3 py-2 rounded-xl shadow-sm border border-gray-100 flex gap-4">
+                  <div><span className="font-bold text-red-500 mr-1">✕</span>평소 언어(A4)와 안내문 언어(E3) 불일치</div>
+                  <div><span className="font-bold bg-yellow-500 text-white px-1.5 py-0.5 rounded text-[10px] mr-1">일괄응답</span>모든 하위 문항에 동일한 번호 선택</div>
+                </div>
+              </div>
               <ResponseTable responses={responses} />
             </div>
           </div>

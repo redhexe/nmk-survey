@@ -3,6 +3,12 @@ import React, { useState } from 'react';
 
 export default function ResponseTable({ responses }: { responses: any[] }) {
   const [expandedRow, setExpandedRow] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  
+  const totalPages = Math.ceil(responses.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentResponses = responses.slice(startIndex, startIndex + itemsPerPage);
 
   const langMap: Record<string, string> = {
     en: '🇬🇧 English',
@@ -90,7 +96,7 @@ export default function ResponseTable({ responses }: { responses: any[] }) {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100 bg-white">
-            {responses.map((r) => {
+            {currentResponses.map((r) => {
               const tags = getValidityTags(r);
               const isExpanded = expandedRow === r.id;
               
@@ -191,6 +197,35 @@ export default function ResponseTable({ responses }: { responses: any[] }) {
           </tbody>
         </table>
       </div>
+      {totalPages > 1 && (
+        <div className="px-6 py-4 border-t border-gray-100 bg-gray-50 flex items-center justify-center gap-2">
+          <button 
+            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {'<'}
+          </button>
+          
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+            <button
+              key={page}
+              onClick={() => setCurrentPage(page)}
+              className={`w-8 h-8 flex items-center justify-center rounded-lg text-sm font-medium transition-colors ${currentPage === page ? 'bg-blue-600 text-white border-blue-600' : 'border border-gray-200 text-gray-600 bg-white hover:bg-gray-50'}`}
+            >
+              {page}
+            </button>
+          ))}
+          
+          <button 
+            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+            className="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {'>'}
+          </button>
+        </div>
+      )}
     </div>
   );
 }
