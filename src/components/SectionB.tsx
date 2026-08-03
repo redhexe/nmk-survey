@@ -105,7 +105,13 @@ export default function SectionB({ sessionId, onNext, onPrev }: SectionProps) {
 
         <SelectionGroup question={t.b1} options={t.b1_options} enOptions={enBase.b1_options} value={b1} onChange={setB1} />
         <SelectionGroup question={t.b2} options={t.b2_options} enOptions={enBase.b2_options} value={b2} onChange={setB2} />
-        <SelectionGroup question={t.b3} options={t.b3_options} enOptions={enBase.b3_options} value={b3} onChange={setB3} />
+        <SelectionGroup 
+          question={t.b3} 
+          options={t.b3_options} 
+          enOptions={["Alone", "2 people", "3–4 people", "5 or more"]} 
+          value={b3} 
+          onChange={setB3} 
+        />
         <SelectionGroup question={t.b4} options={t.b4_options} enOptions={enBase.b4_options} value={b4} onChange={setB4} />
         <SelectionGroup question={t.b5} options={t.b5_options} enOptions={enBase.b5_options} value={b5} onChange={setB5} />
 

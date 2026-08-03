@@ -143,7 +143,8 @@ export default function SectionE({ sessionId, onNext, onPrev }: SectionProps) {
           <h2 className="text-[19px] font-bold text-[#191f28] mb-4">{t.e3}</h2>
           <div className="flex flex-wrap gap-2">
             {t.e3_options.map((opt: string, i: number) => {
-              const baseValue = enBase.e3_options[i];
+              const e3_db_values = ["Korean", "English", "Chinese", "Japanese", "None of these (there was no guidance in my language)"];
+              const baseValue = e3_db_values[i];
               return (
                 <button 
                   key={i} 
