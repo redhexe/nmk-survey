@@ -161,7 +161,7 @@ export default function Charts({ responses }: { responses: any[] }) {
                     <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f3f4f6" />
                     <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#6b7280', fontSize: 12}} dy={10} />
                     <YAxis allowDecimals={false} axisLine={false} tickLine={false} tick={{fill: '#9ca3af', fontSize: 12}} domain={[0, 100]} tickFormatter={(val) => `${val}%`} />
-                    <Tooltip cursor={{fill: '#f3f4f6'}} contentStyle={{borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'}} formatter={(value: number) => [`${value}%`, '불일치율']} />
+                    <Tooltip cursor={{fill: '#f3f4f6'}} contentStyle={{borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'}} formatter={(value: any) => [`${value}%`, '불일치율']} />
                     <Bar dataKey="rate" fill="#ef4444" radius={[6, 6, 0, 0]} barSize={60} />
                   </BarChart>
                 </ResponsiveContainer>
