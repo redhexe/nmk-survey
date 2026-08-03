@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import isoCountries from 'i18n-iso-countries';
 import koCountries from 'i18n-iso-countries/langs/ko.json';
 
@@ -11,11 +11,33 @@ const getKoreanCountryName = (code: string) => {
   return name || code;
 };
 
+const getKoreanLanguageName = (lang: string) => {
+  const map: Record<string, string> = {
+    'English': '영어',
+    'Chinese': '중국어',
+    'Japanese': '일본어',
+    'Korean': '한국어',
+    'Spanish': '스페인어',
+    'French': '프랑스어',
+    'None of these (there was no guidance in my language)': '지원 안됨'
+  };
+  return map[lang] || lang;
+};
+
 export default function ResponseTable({ responses }: { responses: any[] }) {
   const [expandedRow, setExpandedRow] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 8;
   
+  const tableRef = useRef<HTMLDivElement>(null);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    if (tableRef.current) {
+      tableRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   const totalPages = Math.ceil(responses.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentResponses = responses.slice(startIndex, startIndex + itemsPerPage);
@@ -101,10 +123,9 @@ export default function ResponseTable({ responses }: { responses: any[] }) {
               <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">설문 언어</th>
               <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">국적</th>
               <th 
-                className="px-6 py-4 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider cursor-help border-b border-dashed border-gray-400"
-                title="평소 언어(A4)와 안내문 언어(E3) 일치 여부"
+                className="px-6 py-4 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider border-b border-dashed border-gray-400"
               >
-                정보접근
+                언어 사용 (평소 → 오늘)
               </th>
               <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">유효성 태그</th>
               <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">세부 보기</th>
@@ -163,13 +184,18 @@ export default function ResponseTable({ responses }: { responses: any[] }) {
                     <td className="px-6 py-4 text-xs font-medium text-gray-600">
                       {getKoreanCountryName(r.a1_country)}
                     </td>
-                    <td className="px-6 py-4 text-center">
+                    <td className="px-6 py-4 text-center text-xs">
                       {r.a4_language && r.e3_signage_language ? (
-                        (r.e3_signage_language === 'None of these (there was no guidance in my language)' || r.a4_language !== r.e3_signage_language) ? (
-                          <span className="text-red-500 font-bold">✕</span>
-                        ) : (
-                          <span className="text-green-500 font-bold">○</span>
-                        )
+                        (() => {
+                          const a4Ko = getKoreanLanguageName(r.a4_language);
+                          const e3Ko = getKoreanLanguageName(r.e3_signage_language);
+                          const isMismatch = r.e3_signage_language === 'None of these (there was no guidance in my language)' || r.a4_language !== r.e3_signage_language;
+                          return (
+                            <span className={`font-bold ${isMismatch ? 'text-red-500' : 'text-green-500'}`}>
+                              {a4Ko} → {e3Ko}
+                            </span>
+                          );
+                        })()
                       ) : (
                         <span className="text-gray-300">-</span>
                       )}
@@ -215,29 +241,47 @@ export default function ResponseTable({ responses }: { responses: any[] }) {
       {totalPages > 1 && (
         <div className="px-6 py-4 border-t border-gray-100 bg-gray-50 flex items-center justify-center gap-2">
           <button 
-            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+            onClick={() => handlePageChange(Math.max(currentPage - 1, 1))}
             disabled={currentPage === 1}
-            className="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-3 py-1.5 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium"
           >
-            {'<'}
+            {'< 이전'}
           </button>
           
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-            <button
-              key={page}
-              onClick={() => setCurrentPage(page)}
-              className={`w-8 h-8 flex items-center justify-center rounded-lg text-sm font-medium transition-colors ${currentPage === page ? 'bg-blue-600 text-white border-blue-600' : 'border border-gray-200 text-gray-600 bg-white hover:bg-gray-50'}`}
-            >
-              {page}
-            </button>
-          ))}
+          {(() => {
+            const pages = [];
+            if (totalPages <= 5) {
+              for (let i = 1; i <= totalPages; i++) pages.push(i);
+            } else {
+              if (currentPage <= 3) {
+                pages.push(1, 2, 3, 4, '...', totalPages);
+              } else if (currentPage >= totalPages - 2) {
+                pages.push(1, '...', totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
+              } else {
+                pages.push(1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages);
+              }
+            }
+            return pages.map((page, i) => 
+              typeof page === 'number' ? (
+                <button
+                  key={i}
+                  onClick={() => handlePageChange(page)}
+                  className={`w-8 h-8 flex items-center justify-center rounded-lg text-sm font-medium transition-colors ${currentPage === page ? 'bg-blue-600 text-white border-blue-600' : 'border border-gray-200 text-gray-600 bg-white hover:bg-gray-50'}`}
+                >
+                  {page}
+                </button>
+              ) : (
+                <span key={i} className="px-1 text-gray-400">...</span>
+              )
+            );
+          })()}
           
           <button 
-            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+            onClick={() => handlePageChange(Math.min(currentPage + 1, totalPages))}
             disabled={currentPage === totalPages}
-            className="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-3 py-1.5 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium"
           >
-            {'>'}
+            {'다음 >'}
           </button>
         </div>
       )}
