@@ -140,7 +140,7 @@ export default function AdminPage() {
                 </h2>
                 <div className="text-xs text-gray-500 bg-white px-3 py-2 rounded-xl shadow-sm border border-gray-100 flex gap-4">
                   <div>
-                    <span className="text-gray-500 font-medium">언어 사용 컬럼: 평소 쓰는 언어(A4) → 오늘 박물관에서 읽은 안내 언어(E3). 다르면 빨간색, 같으면 초록색.</span>
+                    <span className="text-gray-500 font-medium">언어 사용 컬럼: 평소 쓰는 언어(A4) → 금번 방문 시 안내를 받을 언어(E3). 다르면 빨간색, 같으면 초록색.</span>
                   </div>
                   <div>
                     <span className="font-bold bg-yellow-500 text-white px-1.5 py-0.5 rounded text-[10px] mr-1">일괄응답</span>

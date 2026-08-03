@@ -125,7 +125,7 @@ export default function ResponseTable({ responses }: { responses: any[] }) {
               <th 
                 className="px-6 py-4 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider border-b border-dashed border-gray-400"
               >
-                언어 사용 (평소 → 오늘)
+                언어 사용 (평소 → 관람 시)
               </th>
               <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">유효성 태그</th>
               <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">세부 보기</th>
