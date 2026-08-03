@@ -1,5 +1,15 @@
 'use client';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell, PieChart, Pie } from 'recharts';
+import * as countries from 'i18n-iso-countries';
+import koLocale from 'i18n-iso-countries/langs/ko.json';
+countries.registerLocale(koLocale);
+
+const getKoreanCountryName = (englishName: string) => {
+  if (!englishName) return '';
+  const code = countries.getAlpha2Code(englishName, 'en');
+  if (code) return countries.getName(code, 'ko') || englishName;
+  return englishName;
+};
 
 export default function Charts({ responses }: { responses: any[] }) {
   const validResponses = responses.filter(r => !r.is_test && r.is_complete);
@@ -89,6 +99,32 @@ export default function Charts({ responses }: { responses: any[] }) {
   }, {});
   const mismatchList = Object.entries(mismatches).sort((a, b) => b[1] - a[1]);
 
+  // 8. 국적별 정보접근 불일치율 (n>=5)
+  const countryGroups = validResponses.reduce((acc: Record<string, { total: number, mismatch: number }>, r) => {
+    if (!r.a1_country || !r.a4_language || !r.e3_signage_language) return acc;
+    const country = r.a1_country;
+    if (!acc[country]) acc[country] = { total: 0, mismatch: 0 };
+    acc[country].total += 1;
+    
+    const isMismatch = r.e3_signage_language === 'None of these (there was no guidance in my language)' || r.a4_language !== r.e3_signage_language;
+    if (isMismatch) acc[country].mismatch += 1;
+    
+    return acc;
+  }, {});
+
+  const mismatchByCountry = Object.entries(countryGroups)
+    .filter(([_, data]) => data.total >= 5)
+    .map(([country, data]) => {
+      const rate = Math.round((data.mismatch / data.total) * 100);
+      const koName = getKoreanCountryName(country);
+      return {
+        name: `${koName} (n=${data.total})`,
+        rate,
+        total: data.total
+      };
+    })
+    .sort((a, b) => b.rate - a.rate);
+
   return (
     <div className="space-y-6">
       {/* 1열: 가장 중요한 D2 문항 크게 */}
@@ -110,6 +146,29 @@ export default function Charts({ responses }: { responses: any[] }) {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* 국적별 정보접근 불일치율 */}
+        <div className="bg-white p-6 rounded-[24px] shadow-sm h-[400px] flex flex-col col-span-1 lg:col-span-2">
+          <h3 className="text-sm font-semibold text-gray-800 mb-2">국적별 정보접근 불일치율 (유효 응답 5건 이상)</h3>
+          {isEmpty ? <EmptyState /> : (
+            <div className="flex-1 min-h-0">
+              {mismatchByCountry.length === 0 ? (
+                <div className="flex h-full items-center justify-center text-gray-400 text-sm bg-gray-50/50 rounded-xl border border-dashed border-gray-200 mt-2">
+                  표본이 충분히 쌓이지 않았습니다
+                </div>
+              ) : (
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={mismatchByCountry} margin={{ top: 20, right: 20, left: 0, bottom: 0 }}>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f3f4f6" />
+                    <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#6b7280', fontSize: 12}} dy={10} />
+                    <YAxis allowDecimals={false} axisLine={false} tickLine={false} tick={{fill: '#9ca3af', fontSize: 12}} domain={[0, 100]} tickFormatter={(val) => `${val}%`} />
+                    <Tooltip cursor={{fill: '#f3f4f6'}} contentStyle={{borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'}} formatter={(value: number) => [`${value}%`, '불일치율']} />
+                    <Bar dataKey="rate" fill="#ef4444" radius={[6, 6, 0, 0]} barSize={60} />
+                  </BarChart>
+                </ResponsiveContainer>
+              )}
+            </div>
+          )}
+        </div>
         {/* E1 활동 분포 */}
         <div className="bg-white p-6 rounded-[24px] shadow-sm h-[400px] flex flex-col">
           <h3 className="text-sm font-semibold text-gray-800 mb-2">E1 대기 중 주요 활동 (짐/안내도 강조)</h3>
