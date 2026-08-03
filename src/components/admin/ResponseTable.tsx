@@ -15,6 +15,11 @@ export default function ResponseTable({ responses }: { responses: any[] }) {
       if (r.duration_seconds < 120) tags.push({ label: '단시간(2분-)', color: 'bg-yellow-500' });
     }
 
+    // 제출 실패 의심
+    if (!r.is_complete && r.section_timestamps && r.section_timestamps['F']) {
+      tags.push({ label: '제출 실패 의심', color: 'bg-red-500' });
+    }
+
     // 일괄 응답 검사 (C4)
     let c4Valid = false;
     let firstC4 = null;

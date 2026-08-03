@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { supabase } from '@/lib/supabase';
+import { saveSectionDataBackground } from '@/lib/syncData';
 import { translations } from '@/lib/translations';
 
 interface SectionProps {
@@ -23,7 +24,7 @@ export default function SectionE({ sessionId, onNext, onPrev }: SectionProps) {
   const [e3, setE3] = useState('');
   const [e4, setE4] = useState<string[]>([]);
   
-  const [isSaving, setIsSaving] = useState(false);
+
 
   const bottomRef = useRef<HTMLDivElement>(null);
   const [isScrolledToBottom, setIsScrolledToBottom] = useState(false);
@@ -46,19 +47,19 @@ export default function SectionE({ sessionId, onNext, onPrev }: SectionProps) {
   const lookedAtPhoneValue = enBase.e1_options[0];
   const showE2 = e1.includes(lookedAtPhoneValue);
 
-  const handleNext = async () => {
-    setIsSaving(true);
+  const handleNext = () => {
     const timestamps = JSON.parse(localStorage.getItem('survey_section_timestamps') || '{}');
     timestamps['E'] = new Date().toISOString();
     localStorage.setItem('survey_section_timestamps', JSON.stringify(timestamps));
-    await supabase.from('responses').update({ 
+    
+    saveSectionDataBackground(sessionId, { 
       e1_activities: e1.length > 0 ? e1 : null,
       e2_phone_content: showE2 && e2.length > 0 ? e2 : [], // if not shown or empty, empty array
       e3_signage_language: e3 || null,
       e4_difficulties: e4.length > 0 ? e4 : null,
       section_timestamps: timestamps
-    }).eq('session_id', sessionId);
-    setIsSaving(false);
+    });
+    
     onNext();
   };
 
@@ -187,8 +188,8 @@ export default function SectionE({ sessionId, onNext, onPrev }: SectionProps) {
           <button onClick={onPrev} className="flex-1 py-4 rounded-2xl text-[18px] font-bold text-[#4e5968] bg-[#f2f4f6] hover:bg-[#e5e8eb] transition-colors">
             {ta.back}
           </button>
-          <button onClick={handleNextClick} disabled={isSaving} className={`flex-[2] py-4 rounded-2xl text-[18px] font-bold text-white transition-colors ${!isReady ? 'bg-[#d1d6db]' : 'bg-[#3182f6] hover:bg-[#1b64da] active:bg-[#1b64da] shadow-lg shadow-blue-500/20'}`}>
-            {isSaving ? tc.saving : ta.next}
+          <button onClick={handleNextClick} className={`flex-[2] py-4 rounded-2xl text-[18px] font-bold text-white transition-colors ${!isReady ? 'bg-[#d1d6db]' : 'bg-[#3182f6] hover:bg-[#1b64da] active:bg-[#1b64da] shadow-lg shadow-blue-500/20'}`}>
+            {ta.next}
           </button>
         </div>
       </div>

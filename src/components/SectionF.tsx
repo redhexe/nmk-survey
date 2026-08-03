@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { supabase } from '@/lib/supabase';
+import { submitFinalData } from '@/lib/syncData';
 import { translations } from '@/lib/translations';
 
 interface SectionProps {
@@ -23,6 +24,7 @@ export default function SectionF({ sessionId, onNext, onPrev }: SectionProps) {
   const [f3, setF3] = useState('');
   
   const [isSaving, setIsSaving] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
 
   const bottomRef = useRef<HTMLDivElement>(null);
   const [isScrolledToBottom, setIsScrolledToBottom] = useState(false);
@@ -43,6 +45,7 @@ export default function SectionF({ sessionId, onNext, onPrev }: SectionProps) {
 
   const handleNext = async () => {
     setIsSaving(true);
+    setSubmitError(false);
     const timestamps = JSON.parse(localStorage.getItem('survey_section_timestamps') || '{}');
     const submittedAt = new Date().toISOString();
     timestamps['F'] = submittedAt;
@@ -55,7 +58,7 @@ export default function SectionF({ sessionId, onNext, onPrev }: SectionProps) {
       durationSeconds = Math.round((new Date(submittedAt).getTime() - new Date(scanAt).getTime()) / 1000);
     }
 
-    await supabase.from('responses').update({ 
+    const success = await submitFinalData(sessionId, { 
       f1_wanted_info: f1.length > 0 ? f1 : null,
       f2_would_use: f2.length > 0 ? f2 : null,
       f3_priority: f3 || null,
@@ -63,9 +66,15 @@ export default function SectionF({ sessionId, onNext, onPrev }: SectionProps) {
       submitted_at: submittedAt,
       duration_seconds: durationSeconds,
       section_timestamps: timestamps
-    }).eq('session_id', sessionId);
+    });
+    
     setIsSaving(false);
-    onNext();
+    
+    if (success) {
+      onNext();
+    } else {
+      setSubmitError(true);
+    }
   };
 
   const isRequiredAnswered = true; // No required questions in Section F
@@ -99,6 +108,27 @@ export default function SectionF({ sessionId, onNext, onPrev }: SectionProps) {
       setF2([...f2, val]);
     }
   };
+
+  if (submitError) {
+    return (
+      <div className="min-h-screen flex items-center justify-center p-6 max-w-md mx-auto bg-white">
+        <div className="text-center w-full">
+          <div className="mb-6 flex justify-center">
+            <svg className="w-16 h-16 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+          </div>
+          <h1 className="text-2xl font-bold mb-4 text-[#191f28]">Connection Issue</h1>
+          <p className="text-[#4e5968] text-lg font-medium mb-8">Failed to save your response due to network instability.</p>
+          <button 
+            onClick={handleNext} 
+            disabled={isSaving}
+            className="w-full py-4 rounded-2xl text-[18px] font-bold text-white bg-[#3182f6] hover:bg-[#1b64da] active:bg-[#1b64da] shadow-lg shadow-blue-500/20 transition-colors"
+          >
+            {isSaving ? "Retrying..." : "Tap here to submit again"}
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-[100dvh] bg-white flex flex-col w-full max-w-md mx-auto relative pb-28">
