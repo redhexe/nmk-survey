@@ -50,7 +50,7 @@ export function flushPendingSaves() {
     const sessionId = localStorage.getItem('survey_session_id');
     if (sessionId) {
       // Fire and forget
-      supabase.from('responses').update(dataToSave).eq('session_id', sessionId).then(() => {}).catch(() => {});
+      Promise.resolve(supabase.from('responses').update(dataToSave).eq('session_id', sessionId)).then(() => {}).catch(() => {});
     }
   }
 }
