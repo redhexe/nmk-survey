@@ -20,8 +20,71 @@ if (typeof window !== 'undefined') {
  * SPA 라우팅 중의 네트워크 지연/일시 끊김을 방지하기 위해 
  * 백그라운드 비동기 통신 + pending 카운트만 유지합니다.
  */
+export function getInitData(key: string, fallback: any) {
+  if (typeof window === 'undefined') return fallback;
+  const str = localStorage.getItem('survey_data');
+  if (!str) return fallback;
+  try {
+    const data = JSON.parse(str);
+    return data[key] !== undefined && data[key] !== null ? data[key] : fallback;
+  } catch { return fallback; }
+}
+
+export function saveLocalData(data: any) {
+  if (typeof window === 'undefined') return;
+  try {
+    const existingStr = localStorage.getItem('survey_data');
+    const existing = existingStr ? JSON.parse(existingStr) : {};
+    localStorage.setItem('survey_data', JSON.stringify({ ...existing, ...data }));
+  } catch(e) {}
+}
+
+let debounceTimer: any = null;
+let accumulatedData: any = {};
+
+export function flushPendingSaves() {
+  if (Object.keys(accumulatedData).length > 0) {
+    if (debounceTimer) clearTimeout(debounceTimer);
+    const dataToSave = { ...accumulatedData };
+    accumulatedData = {};
+    const sessionId = localStorage.getItem('survey_session_id');
+    if (sessionId) {
+      // Fire and forget
+      supabase.from('responses').update(dataToSave).eq('session_id', sessionId).then(() => {}).catch(() => {});
+    }
+  }
+}
+
+if (typeof window !== 'undefined') {
+  window.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+      flushPendingSaves();
+    }
+  });
+  window.addEventListener('pagehide', () => {
+    flushPendingSaves();
+  });
+}
+
+export function saveSectionDataDebounced(sessionId: string, data: any) {
+  saveLocalData(data);
+  
+  accumulatedData = { ...accumulatedData, ...data };
+  
+  if (debounceTimer) clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(() => {
+    flushPendingSaves();
+  }, 1000);
+}
+
 export async function saveSectionDataBackground(sessionId: string, data: any) {
   pendingSaves++;
+  try {
+    const existingStr = localStorage.getItem('survey_data');
+    const existing = existingStr ? JSON.parse(existingStr) : {};
+    localStorage.setItem('survey_data', JSON.stringify({ ...existing, ...data }));
+  } catch(e) {}
+
   try {
     // 1회 재시도 로직 포함
     for (let i = 0; i < 2; i++) {

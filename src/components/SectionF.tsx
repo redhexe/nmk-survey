@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { supabase } from '@/lib/supabase';
-import { submitFinalData } from '@/lib/syncData';
+import { saveSectionDataBackground, getInitData, submitFinalData } from '@/lib/syncData';
 import { translations } from '@/lib/translations';
 
 interface SectionProps {
@@ -19,9 +19,9 @@ export default function SectionF({ sessionId, onNext, onPrev }: SectionProps) {
     window.scrollTo(0, 0);
   }, []);
 
-  const [f1, setF1] = useState<string[]>([]);
-  const [f2, setF2] = useState<string[]>([]);
-  const [f3, setF3] = useState('');
+  const [f1, setF1] = useState<string[]>(getInitData('f1_wanted_info', []));
+  const [f2, setF2] = useState<string[]>(getInitData('f2_would_use', []));
+  const [f3, setF3] = useState<string>(getInitData('f3_priority', ''));
   
   const [isSaving, setIsSaving] = useState(false);
   const [submitError, setSubmitError] = useState(false);
@@ -79,6 +79,16 @@ export default function SectionF({ sessionId, onNext, onPrev }: SectionProps) {
 
   const isRequiredAnswered = true; // No required questions in Section F
   const isReady = isScrolledToBottom && isRequiredAnswered;
+
+  useEffect(() => {
+    import('@/lib/syncData').then(({ saveSectionDataDebounced }) => {
+      saveSectionDataDebounced(sessionId, {
+        f1_wanted_info: f1.length > 0 ? f1 : null,
+        f2_would_use: f2.length > 0 ? f2 : null,
+        f3_priority: f3 || null,
+      });
+    });
+  }, [sessionId, f1, f2, f3]);
 
   const handleNextClick = () => {
     if (!isScrolledToBottom) {

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { supabase } from '@/lib/supabase';
-import { saveSectionDataBackground } from '@/lib/syncData';
+import { saveSectionDataBackground, getInitData } from '@/lib/syncData';
 import { translations } from '@/lib/translations';
 
 interface SectionProps {
@@ -40,10 +40,10 @@ export default function SectionD({ sessionId, onNext, onPrev }: SectionProps) {
     window.scrollTo(0, 0);
   }, []);
 
-  const [d1_1, setD1_1] = useState<number | null>(null);
-  const [d1_2, setD1_2] = useState<number | null>(null);
-  const [d1_3, setD1_3] = useState<number | null>(null);
-  const [d2, setD2] = useState('');
+  const [d1_1, setD1_1] = useState<number | null>(getInitData('d1_1', null));
+  const [d1_2, setD1_2] = useState<number | null>(getInitData('d1_2', null));
+  const [d1_3, setD1_3] = useState<number | null>(getInitData('d1_3', null));
+  const [d2, setD2] = useState<string>(getInitData('d2_expectation_change', ''));
   
 
 
@@ -76,6 +76,15 @@ export default function SectionD({ sessionId, onNext, onPrev }: SectionProps) {
     
     onNext();
   };
+
+  useEffect(() => {
+    import('@/lib/syncData').then(({ saveSectionDataDebounced }) => {
+      saveSectionDataDebounced(sessionId, {
+        d1_1, d1_2, d1_3,
+        d2_expectation_change: d2 || null,
+      });
+    });
+  }, [sessionId, d1_1, d1_2, d1_3, d2]);
 
   const isRequiredAnswered = d1_1 !== null && d1_2 !== null && d1_3 !== null;
   const isReady = isScrolledToBottom && isRequiredAnswered;

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { supabase } from '@/lib/supabase';
-import { saveSectionDataBackground } from '@/lib/syncData';
+import { saveSectionDataBackground, getInitData } from '@/lib/syncData';
 import { translations } from '@/lib/translations';
 
 interface SectionProps {
@@ -19,10 +19,11 @@ export default function SectionE({ sessionId, onNext, onPrev }: SectionProps) {
     window.scrollTo(0, 0);
   }, []);
 
-  const [e1, setE1] = useState<string[]>([]);
-  const [e2, setE2] = useState<string[]>([]);
-  const [e3, setE3] = useState('');
-  const [e4, setE4] = useState<string[]>([]);
+  const [e1, setE1] = useState<string[]>(getInitData('e1_activities', []));
+  const [e2, setE2] = useState<string[]>(getInitData('e2_phone_content', []));
+  const [e3, setE3] = useState<string>(getInitData('e3_signage_language', ''));
+  const [e4, setE4] = useState<string[]>(getInitData('e4_difficulties', []));
+  const [e5, setE5] = useState<string>(getInitData('e_leaflet_aware', ''));
   
 
 
@@ -57,11 +58,24 @@ export default function SectionE({ sessionId, onNext, onPrev }: SectionProps) {
       e2_phone_content: showE2 && e2.length > 0 ? e2 : [], // if not shown or empty, empty array
       e3_signage_language: e3 || null,
       e4_difficulties: e4.length > 0 ? e4 : null,
+      e_leaflet_aware: e5 || null,
       section_timestamps: timestamps
     });
     
     onNext();
   };
+
+  useEffect(() => {
+    import('@/lib/syncData').then(({ saveSectionDataDebounced }) => {
+      saveSectionDataDebounced(sessionId, {
+        e1_activities: e1.length > 0 ? e1 : null,
+        e2_phone_content: showE2 && e2.length > 0 ? e2 : [],
+        e3_signage_language: e3 || null,
+        e4_difficulties: e4.length > 0 ? e4 : null,
+        e_leaflet_aware: e5 || null,
+      });
+    });
+  }, [sessionId, e1, e2, e3, e4, e5, showE2]);
 
   const isRequiredAnswered = true; // No required questions in Section E
   const isReady = isScrolledToBottom && isRequiredAnswered;
@@ -171,6 +185,25 @@ export default function SectionE({ sessionId, onNext, onPrev }: SectionProps) {
                   key={i} 
                   onClick={() => toggleArray(baseValue, e4, setE4)} 
                   className={`text-left p-4 rounded-2xl text-[16px] font-medium transition-all border ${isSelected ? 'bg-[#e8f3ff] text-[#3182f6] border-[#3182f6] shadow-sm' : 'bg-[#f2f4f6] text-[#4e5968] border-transparent hover:bg-[#e5e8eb]'}`}
+                >
+                  {opt}
+                </button>
+              )
+            })}
+          </div>
+        </div>
+
+        {/* E5 (B-6: Leaflet Aware) */}
+        <div>
+          <h2 className="text-[19px] font-bold text-[#191f28] mb-4">{t.e5}</h2>
+          <div className="flex flex-col gap-3">
+            {t.e5_options?.map((opt: string, i: number) => {
+              const baseValue = enBase.e5_options[i];
+              return (
+                <button 
+                  key={i} 
+                  onClick={() => setE5(e5 === baseValue ? '' : baseValue)} 
+                  className={`text-left p-5 rounded-2xl text-[17px] font-medium transition-all ${e5 === baseValue ? 'bg-[#3182f6] text-white shadow-md' : 'bg-[#f2f4f6] text-[#4e5968] hover:bg-[#e5e8eb]'}`}
                 >
                   {opt}
                 </button>

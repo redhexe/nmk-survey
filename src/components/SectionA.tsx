@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { supabase } from '@/lib/supabase';
-import { saveSectionDataBackground } from '@/lib/syncData';
+import { saveSectionDataBackground, getInitData } from '@/lib/syncData';
 import { translations, getCountries } from '@/lib/translations';
 import Select from 'react-select';
 
@@ -20,11 +20,18 @@ export default function SectionA({ sessionId, onNext, onPrev }: SectionProps) {
     window.scrollTo(0, 0);
   }, []);
 
-  const [a1, setA1] = useState<any>(null); // react-select option
-  const [a2, setA2] = useState('');
-  const [a3, setA3] = useState('');
-  const [a4, setA4] = useState('');
-  const [a4Other, setA4Other] = useState('');
+  const countries = useMemo(() => getCountries(lang), [lang]);
+  
+  const initialCountryValue = getInitData('a1_country', null);
+  const initialCountry = useMemo(() => {
+    return initialCountryValue ? countries.find(c => c.value === initialCountryValue) || null : null;
+  }, [initialCountryValue, countries]);
+
+  const [a1, setA1] = useState<any>(initialCountry);
+  const [a2, setA2] = useState(getInitData('a2_age', ''));
+  const [a3, setA3] = useState(getInitData('a3_gender', ''));
+  const [a4, setA4] = useState(getInitData('a4_language', ''));
+  const [a4Other, setA4Other] = useState(getInitData('a4_language_other', ''));
 
   const bottomRef = useRef<HTMLDivElement>(null);
   const [isScrolledToBottom, setIsScrolledToBottom] = useState(false);
@@ -33,8 +40,6 @@ export default function SectionA({ sessionId, onNext, onPrev }: SectionProps) {
   const t = translations[lang]?.sectionA || translations['en'].sectionA;
   const enBase = translations['en'].sectionA;
   const tc = translations[lang]?.common || translations['en'].common;
-
-  const countries = useMemo(() => getCountries(lang), [lang]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
@@ -50,7 +55,7 @@ export default function SectionA({ sessionId, onNext, onPrev }: SectionProps) {
     localStorage.setItem('survey_section_timestamps', JSON.stringify(timestamps));
     
     saveSectionDataBackground(sessionId, { 
-      a1_country: a1.value, 
+      a1_country: a1?.value, 
       a2_age: a2 || null, 
       a3_gender: a3 || null, 
       a4_language: a4 || null, 
@@ -60,6 +65,18 @@ export default function SectionA({ sessionId, onNext, onPrev }: SectionProps) {
     
     onNext();
   };
+
+  useEffect(() => {
+    import('@/lib/syncData').then(({ saveSectionDataDebounced }) => {
+      saveSectionDataDebounced(sessionId, {
+        a1_country: a1?.value, 
+        a2_age: a2 || null, 
+        a3_gender: a3 || null, 
+        a4_language: a4 || null, 
+        a4_language_other: a4 === enBase.a4_options[6] ? a4Other : null,
+      });
+    });
+  }, [sessionId, a1, a2, a3, a4, a4Other, enBase.a4_options]);
 
   const isRequiredAnswered = !!a1;
   const isReady = isScrolledToBottom && isRequiredAnswered;

@@ -125,8 +125,33 @@ export default function Charts({ responses }: { responses: any[] }) {
     })
     .sort((a, b) => b.rate - a.rate);
 
+  // 9. Queue Clarity Avg (c_queue_clarity)
+  const clarityAnswers = validResponses.filter(r => typeof r.c_queue_clarity === 'number');
+  const clarityAvg = clarityAnswers.length > 0 
+    ? (clarityAnswers.reduce((acc, r) => acc + r.c_queue_clarity, 0) / clarityAnswers.length).toFixed(2)
+    : 'N/A';
+
+  // 10. Leaflet Awareness (e_leaflet_aware "몰랐다" 비율)
+  const leafletAnswers = validResponses.filter(r => typeof r.e_leaflet_aware === 'string');
+  const leafletUnawareCount = leafletAnswers.filter(r => r.e_leaflet_aware?.includes("No, I didn't know")).length;
+  const leafletUnawareRate = leafletAnswers.length > 0
+    ? Math.round((leafletUnawareCount / leafletAnswers.length) * 100) + '%'
+    : 'N/A';
+
   return (
     <div className="space-y-6">
+      {/* KPI Cards */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="bg-white p-6 rounded-[24px] shadow-sm flex flex-col justify-center items-center py-10">
+          <h3 className="text-sm font-semibold text-gray-500 mb-2">줄 선택 명확성 평균 (5점 만점)</h3>
+          <p className="text-4xl font-extrabold text-[#8b5cf6]">{clarityAvg}</p>
+        </div>
+        <div className="bg-white p-6 rounded-[24px] shadow-sm flex flex-col justify-center items-center py-10">
+          <h3 className="text-sm font-semibold text-gray-500 mb-2">디지털 리플릿 미인지율</h3>
+          <p className="text-4xl font-extrabold text-[#ef4444]">{leafletUnawareRate}</p>
+        </div>
+      </div>
+
       {/* 1열: 가장 중요한 D2 문항 크게 */}
       <div className="bg-white p-6 rounded-[24px] shadow-sm h-96 flex flex-col">
         <h3 className="text-sm font-semibold text-gray-800 mb-2">D2 기다린 시간이 기대에 영향을 주었습니까?</h3>

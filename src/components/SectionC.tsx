@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { supabase } from '@/lib/supabase';
-import { saveSectionDataBackground } from '@/lib/syncData';
+import { saveSectionDataBackground, getInitData } from '@/lib/syncData';
 import { translations } from '@/lib/translations';
 
 interface SectionProps {
@@ -40,18 +40,23 @@ export default function SectionC({ sessionId, onNext, onPrev }: SectionProps) {
     window.scrollTo(0, 0);
   }, []);
 
-  const [c1, setC1] = useState<number | null>(null);
-  const [c2, setC2] = useState<string[]>([]);
-  const [c3, setC3] = useState('');
-  const [c5, setC5] = useState('');
-  const [c4_1, setC4_1] = useState<number | null>(null);
-  const [c4_2, setC4_2] = useState<number | null>(null);
-  const [c4_3, setC4_3] = useState<number | null>(null);
-  const [c4_4, setC4_4] = useState<number | null>(null);
-  const [c4_5, setC4_5] = useState<number | null>(null);
-  const [c4_6, setC4_6] = useState<number | null>(null);
-  const [c4_7, setC4_7] = useState<number | null>(null);
-  const [c4_8, setC4_8] = useState<number | null>(null);
+  const [c1, setC1] = useState<number | null>(getInitData('c1_perceived_wait', null));
+  const [c2, setC2] = useState<string[]>(getInitData('c2_feelings', []));
+  const [c3, setC3] = useState<string>(getInitData('c3_worst_section', ''));
+  const [c5, setC5] = useState<string>(getInitData('c5_estimated_wait', ''));
+  const [c4_1, setC4_1] = useState<number | null>(getInitData('c4_1', null));
+  const [c4_2, setC4_2] = useState<number | null>(getInitData('c4_2', null));
+  const [c4_3, setC4_3] = useState<number | null>(getInitData('c4_3', null));
+  const [c4_4, setC4_4] = useState<number | null>(getInitData('c4_4', null));
+  const [c4_5, setC4_5] = useState<number | null>(getInitData('c4_5', null));
+  const [c4_6, setC4_6] = useState<number | null>(getInitData('c4_6', null));
+  const [c4_7, setC4_7] = useState<number | null>(getInitData('c4_7', null));
+  const [c4_8, setC4_8] = useState<number | null>(getInitData('c4_8', null));
+  
+  const [c6, setC6] = useState<number | null>(getInitData('c_queue_clarity', null));
+  const [c7, setC7] = useState<string[]>(getInitData('c_staff_help', []));
+  const [c8, setC8] = useState<string>(getInitData('c_item_disposal', ''));
+  const [c9, setC9] = useState<string>(getInitData('c_locker_aware', ''));
   
 
 
@@ -84,11 +89,32 @@ export default function SectionC({ sessionId, onNext, onPrev }: SectionProps) {
       c5_estimated_wait: c5 || null,
       c4_1: c4_1, c4_2: c4_2, c4_3: c4_3, c4_4: c4_4,
       c4_5: c4_5, c4_6: c4_6, c4_7: c4_7, c4_8: c4_8,
+      c_queue_clarity: c6,
+      c_staff_help: c7.length > 0 ? c7 : null,
+      c_item_disposal: c8 || null,
+      c_locker_aware: c9 || null,
       section_timestamps: timestamps
     });
     
     onNext();
   };
+
+  useEffect(() => {
+    import('@/lib/syncData').then(({ saveSectionDataDebounced }) => {
+      saveSectionDataDebounced(sessionId, {
+        c1_perceived_wait: c1,
+        c2_feelings: c2.length > 0 ? c2 : null,
+        c3_worst_section: c3 || null,
+        c5_estimated_wait: c5 || null,
+        c4_1, c4_2, c4_3, c4_4, c4_5, c4_6, c4_7, c4_8,
+        c_queue_clarity: c6,
+        c_staff_help: c7.length > 0 ? c7 : null,
+        c_item_disposal: c8 || null,
+        c_locker_aware: c9 || null,
+      });
+    });
+  }, [sessionId, c1, c2, c3, c5, c4_1, c4_2, c4_3, c4_4, c4_5, c4_6, c4_7, c4_8, c6, c7, c8, c9]);
+
   const isRequiredAnswered = c1 !== null;
   const isReady = isScrolledToBottom && isRequiredAnswered;
 
@@ -112,6 +138,14 @@ export default function SectionC({ sessionId, onNext, onPrev }: SectionProps) {
       setC2(c2.filter(v => v !== val));
     } else {
       setC2([...c2, val]);
+    }
+  };
+
+  const toggleC7 = (val: string) => {
+    if (c7.includes(val)) {
+      setC7(c7.filter(v => v !== val));
+    } else {
+      setC7([...c7, val]);
     }
   };
 
@@ -196,6 +230,70 @@ export default function SectionC({ sessionId, onNext, onPrev }: SectionProps) {
                   key={i} 
                   onClick={() => setC5(c5 === baseValue ? '' : baseValue)} 
                   className={`text-left p-5 rounded-2xl text-[17px] font-medium transition-all ${c5 === baseValue ? 'bg-[#3182f6] text-white shadow-md' : 'bg-[#f2f4f6] text-[#4e5968] hover:bg-[#e5e8eb]'}`}
+                >
+                  {opt}
+                </button>
+              )
+            })}
+          </div>
+        </div>
+
+        {/* C6 (B-1: Queue Clarity) */}
+        <div className="bg-[#fafafa] p-5 rounded-3xl border border-gray-100">
+          <RatingMatrix question={t.c6} value={c6} onChange={setC6} minText={t.c6_min || 'Not clear at all'} maxText={t.c6_max || 'Very clear'} />
+        </div>
+
+        {/* C7 (B-2: Staff Help) */}
+        <div>
+          <h2 className="text-[19px] font-bold text-[#191f28] mb-1">{t.c7}</h2>
+          <p className="text-[#8b95a1] text-[14px] mb-4 font-normal">{tc.multiple_select}</p>
+          <div className="flex flex-col gap-3">
+            {t.c7_options?.map((opt: string, i: number) => {
+              const baseValue = enBase.c7_options[i];
+              const isSelected = c7.includes(baseValue);
+              return (
+                <button 
+                  key={i} 
+                  onClick={() => toggleC7(baseValue)} 
+                  className={`text-left p-4 rounded-2xl text-[16px] font-medium transition-all border ${isSelected ? 'bg-[#e8f3ff] text-[#3182f6] border-[#3182f6] shadow-sm' : 'bg-[#f2f4f6] text-[#4e5968] border-transparent hover:bg-[#e5e8eb]'}`}
+                >
+                  {opt}
+                </button>
+              )
+            })}
+          </div>
+        </div>
+
+        {/* C8 (B-3: Item Disposal) */}
+        <div>
+          <h2 className="text-[19px] font-bold text-[#191f28] mb-4">{t.c8}</h2>
+          <div className="flex flex-col gap-3">
+            {t.c8_options?.map((opt: string, i: number) => {
+              const baseValue = enBase.c8_options[i];
+              return (
+                <button 
+                  key={i} 
+                  onClick={() => setC8(c8 === baseValue ? '' : baseValue)} 
+                  className={`text-left p-5 rounded-2xl text-[17px] font-medium transition-all ${c8 === baseValue ? 'bg-[#3182f6] text-white shadow-md' : 'bg-[#f2f4f6] text-[#4e5968] hover:bg-[#e5e8eb]'}`}
+                >
+                  {opt}
+                </button>
+              )
+            })}
+          </div>
+        </div>
+
+        {/* C9 (B-4: Locker Aware) */}
+        <div>
+          <h2 className="text-[19px] font-bold text-[#191f28] mb-4">{t.c9}</h2>
+          <div className="flex flex-col gap-3">
+            {t.c9_options?.map((opt: string, i: number) => {
+              const baseValue = enBase.c9_options[i];
+              return (
+                <button 
+                  key={i} 
+                  onClick={() => setC9(c9 === baseValue ? '' : baseValue)} 
+                  className={`text-left p-5 rounded-2xl text-[17px] font-medium transition-all ${c9 === baseValue ? 'bg-[#3182f6] text-white shadow-md' : 'bg-[#f2f4f6] text-[#4e5968] hover:bg-[#e5e8eb]'}`}
                 >
                   {opt}
                 </button>

@@ -3,7 +3,7 @@
     "welcome": "Visitor Experience Survey",
     "intro": "<div class=\"mb-3\">Thank you for visiting<br>the National Museum of Korea.</div><div class=\"mb-3\">I am a researcher at the Graduate School<br>of Techno Design, Kookmin University.<br>This short survey is part of my study<br>to improve the visit experience<br>for international visitors.</div><div class=\"mb-3\">It takes only <strong>about 4 minutes</strong><br>and all responses are <strong>completely anonymous</strong><br>— no personal identifying information is collected.</div>",
     "consent": "I understand and agree to participate",
-    "instruction": "Please complete this just before you enter the exhibition halls.",
+    "instruction": "Please complete this just before you enter the exhibition halls. You can answer this survey in parts while waiting.",
     "ok": "Start Survey",
     "selectLanguage": "Please select your language"
   },
@@ -12,11 +12,29 @@
     "a1": "A1. Which country do you live in?",
     "a1_placeholder": "Select a country...",
     "a2": "A2. What is your age group?",
-    "a2_options": ["Under 20", "20s", "30s", "40s", "50s", "60 or older"],
+    "a2_options": [
+      "Under 20",
+      "20s",
+      "30s",
+      "40s",
+      "50s",
+      "60 or older"
+    ],
     "a3": "A3. What is your gender?",
-    "a3_options": ["Male", "Female"],
+    "a3_options": [
+      "Male",
+      "Female"
+    ],
     "a4": "A4. Which language do you mainly use in daily life?",
-    "a4_options": ["English", "Chinese", "Japanese", "Korean", "Spanish", "French", "Other (please specify)"],
+    "a4_options": [
+      "English",
+      "Chinese",
+      "Japanese",
+      "Korean",
+      "Spanish",
+      "French",
+      "Other (please specify)"
+    ],
     "a4_placeholder": "Please specify",
     "next": "Next",
     "back": "Back"
@@ -24,26 +42,82 @@
   "sectionB": {
     "title": "Section B. Your visit",
     "b1": "B1. What brings you to Korea?",
-    "b1_options": ["Travel / tourism", "I live in Korea", "Study / training", "Business", "Other"],
+    "b1_options": [
+      "Travel / tourism",
+      "I live in Korea",
+      "Study / training",
+      "Business",
+      "Other"
+    ],
     "b2": "B2. Is this your first visit to the National Museum of Korea?",
-    "b2_options": ["First visit", "I have been here before"],
+    "b2_options": [
+      "First visit",
+      "I have been here before"
+    ],
     "b3": "B3. How many people are in your group today (including yourself)?",
-    "b3_options": ["1 (Just me)", "2", "3–4", "5+"],
+    "b3_options": [
+      "1 (Just me)",
+      "2",
+      "3–4",
+      "5+"
+    ],
     "b4": "B4. Did you look up information about this museum or its exhibitions before coming?",
-    "b4_options": ["Yes, in detail", "Yes, a little", "No"],
+    "b4_options": [
+      "Yes, in detail",
+      "Yes, a little",
+      "No"
+    ],
     "b5": "B5. Did you bring a bag or luggage with you today?",
-    "b5_options": ["A backpack or large bag", "Only a small bag or handbag", "Nothing in particular"]
+    "b5_options": [
+      "A backpack or large bag",
+      "Only a small bag or handbag",
+      "Nothing in particular"
+    ],
+    "b6": "B6. Before coming today, did you look up any information about the museum? (Select all that apply)",
+    "b6_options": [
+      "Official museum website",
+      "Travel app or blog",
+      "Social media",
+      "A friend or guide told me",
+      "No, I didn't look anything up"
+    ]
   },
   "sectionC": {
     "title": "Section C. Your waiting experience today",
-    "c1": "C1. How did the time you spent waiting to enter feel to you?",
-    "c1_options": ["1. Very short", "2. Short", "3. Neutral", "4. Long", "5. Very long"],
+    "c1": "C1. How has the time you've waited so far felt to you?",
+    "c1_options": [
+      "1. Very short",
+      "2. Short",
+      "3. Neutral",
+      "4. Long",
+      "5. Very long"
+    ],
     "c2": "C2. How did you feel while waiting?",
-    "c2_options": ["Bored", "Anxious", "Confused", "Excited", "Relaxed", "Physically uncomfortable (heat, tiredness)"],
+    "c2_options": [
+      "Bored",
+      "Anxious",
+      "Confused",
+      "Excited",
+      "Relaxed",
+      "Physically uncomfortable (heat, tiredness)"
+    ],
     "c3": "C3. Which part felt the most uncomfortable?",
-    "c3_options": ["Walking from the subway station to the museum", "The outdoor plaza and stairs in front of the museum", "The outdoor queue in front of the building", "The bag security check line", "The long indoor corridor before the exhibition halls", "Nothing felt particularly uncomfortable"],
+    "c3_options": [
+      "Walking from the subway station to the museum",
+      "The outdoor plaza and stairs in front of the museum",
+      "The outdoor queue in front of the building",
+      "The bag security check line",
+      "The long indoor corridor before the exhibition halls",
+      "Nothing felt particularly uncomfortable"
+    ],
     "c5": "C5. How long do you think you actually waited before entering the exhibition halls?",
-    "c5_options": ["Less than 5 minutes", "5–10 minutes", "10–20 minutes", "20–30 minutes", "More than 30 minutes"],
+    "c5_options": [
+      "Less than 5 minutes",
+      "5–10 minutes",
+      "10–20 minutes",
+      "20–30 minutes",
+      "More than 30 minutes"
+    ],
     "c4": "C4. While waiting, how much do you agree with each statement?",
     "c4_q": [
       "1. I understood what the line I was standing in was for",
@@ -56,7 +130,33 @@
       "8. The surrounding noise did not bother me"
     ],
     "disagree": "Strongly disagree",
-    "agree": "Strongly agree"
+    "agree": "Strongly agree",
+    "c6": "C6. When you arrived, was it clear which line you should join?",
+    "c6_min": "Not clear at all",
+    "c6_max": "Very clear",
+    "c7": "C7. Did a staff member give you any directions today? (Select all that apply)",
+    "c7_options": [
+      "Which line to join",
+      "Something I was carrying (drink, bag, etc.)",
+      "Where the exhibition I wanted was",
+      "Something else",
+      "No, I didn't receive any directions"
+    ],
+    "c8": "C8. Did you have to do anything with an item you were carrying before entering?",
+    "c8_options": [
+      "No, nothing",
+      "I threw something away",
+      "I finished a drink before entering",
+      "I left the line and came back",
+      "I put it in a locker",
+      "Something else"
+    ],
+    "c9": "C9. Did you know the museum has free lockers?",
+    "c9_options": [
+      "Yes, and I know where they are",
+      "Yes, but I don't know where they are",
+      "No, I didn't know"
+    ]
   },
   "sectionD": {
     "title": "Section D. Your expectations right now",
@@ -67,31 +167,88 @@
       "3. I have a clear idea of what I am going to see"
     ],
     "d2": "D2. Did the time you spent waiting affect your expectations for the visit?",
-    "d2_options": ["It increased my expectations", "No change", "It lowered my expectations"],
+    "d2_options": [
+      "It increased my expectations",
+      "No change",
+      "It lowered my expectations"
+    ],
     "disagree": "Strongly disagree",
     "agree": "Strongly agree"
   },
   "sectionE": {
     "title": "Section E. Information and behaviour while waiting",
     "e1": "E1. What did you mainly do while waiting?",
-    "e1_options": ["Looked at my phone", "Talked with my companions", "Looked around", "Read signage", "Picked up a leaflet or map at the entrance", "Nothing in particular", "It was hard to use my phone because of my bags or belongings"],
+    "e1_options": [
+      "Looked at my phone",
+      "Talked with my companions",
+      "Looked around",
+      "Read signage",
+      "Picked up a leaflet or map at the entrance",
+      "Nothing in particular",
+      "It was hard to use my phone because of my bags or belongings",
+      "I looked around the museum building or space",
+      "I watched other visitors"
+    ],
     "e2": "E2. If you used your phone, what did you look at?",
-    "e2_options": ["Museum or exhibition information", "Maps or directions", "Translation app", "Social media or messaging", "Taking photos", "Other"],
+    "e2_options": [
+      "Museum or exhibition information",
+      "Maps or directions",
+      "Translation app",
+      "Social media or messaging",
+      "Taking photos",
+      "Other"
+    ],
     "e3": "E3. Which language did you use to understand the museum's signage and guides today?",
-    "e3_options": ["Korean", "English", "Chinese", "Japanese", "I couldn't understand any of the signs/guides"],
+    "e3_options": [
+      "Korean",
+      "English",
+      "Chinese",
+      "Japanese",
+      "I couldn't understand any of the signs/guides"
+    ],
     "e4": "E4. Did you have any difficulty getting information at the museum today?",
-    "e4_options": ["Language made it hard to understand", "I did not know where to find the information I needed", "Signage text was too small or lacked detail", "No particular difficulty"]
+    "e4_options": [
+      "Language made it hard to understand",
+      "I did not know where to find the information I needed",
+      "Signage text was too small or lacked detail",
+      "No particular difficulty"
+    ],
+    "e5": "E5. The museum offers a digital guide leaflet in your language via QR code. Did you know about it?",
+    "e5_options": [
+      "Yes, and I've used it",
+      "Yes, but I haven't used it",
+      "No, I didn't know"
+    ]
   },
   "sectionF": {
     "title": "Section F. What would help",
     "f1": "F1. Before entering the exhibition halls, what did you most want to know?",
     "f1_sub": "(Maximum 2 choices)",
     "f1_limit": "You can select up to 2 choices.",
-    "f1_options": ["What exhibitions I can see", "A recommended route through the museum", "How long a visit takes", "The must-see highlights", "Facilities such as restrooms and lockers", "Historical background of the objects"],
+    "f1_options": [
+      "What exhibitions I can see",
+      "A recommended route through the museum",
+      "How long a visit takes",
+      "The must-see highlights",
+      "Facilities such as restrooms and lockers",
+      "Historical background of the objects"
+    ],
     "f2": "F2. If the following were available on your phone while waiting, would you use them?",
-    "f2_options": ["A preview of today's exhibitions", "Stories behind key objects", "A route recommended for me", "Estimated waiting time", "Introduction to Korean history and culture", "I probably would not use any of these"],
+    "f2_options": [
+      "A preview of today's exhibitions",
+      "Stories behind key objects",
+      "A route recommended for me",
+      "Estimated waiting time",
+      "Introduction to Korean history and culture",
+      "I probably would not use any of these"
+    ],
     "f3": "F3. Waiting to enter cannot be fully removed because of the number of visitors. Which of the following would help you most?",
-    "f3_options": ["Reducing the waiting time itself", "Telling me exactly how long I need to wait", "Having something to look at or read while waiting", "Better signage and wayfinding"],
+    "f3_options": [
+      "Reducing the waiting time itself",
+      "Telling me exactly how long I need to wait",
+      "Having something to look at or read while waiting",
+      "Better signage and wayfinding"
+    ],
     "submit": "Submit Survey",
     "submitting": "Submitting..."
   },

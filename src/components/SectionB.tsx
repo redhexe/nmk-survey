@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { supabase } from '@/lib/supabase';
-import { saveSectionDataBackground } from '@/lib/syncData';
+import { saveSectionDataBackground, getInitData } from '@/lib/syncData';
 import { translations } from '@/lib/translations';
 
 interface SectionProps {
@@ -39,11 +39,20 @@ export default function SectionB({ sessionId, onNext, onPrev }: SectionProps) {
     window.scrollTo(0, 0);
   }, []);
 
-  const [b1, setB1] = useState('');
-  const [b2, setB2] = useState('');
-  const [b3, setB3] = useState('');
-  const [b4, setB4] = useState('');
-  const [b5, setB5] = useState('');
+  const [b1, setB1] = useState(getInitData('b1_purpose', ''));
+  const [b2, setB2] = useState(getInitData('b2_first_visit', ''));
+  const [b3, setB3] = useState(getInitData('b3_group_size', ''));
+  const [b4, setB4] = useState(getInitData('b4_prior_search', ''));
+  const [b5, setB5] = useState(getInitData('b5_baggage', ''));
+  const [b6, setB6] = useState<string[]>(getInitData('b_pre_info', []));
+
+  const toggleArray = (val: string, arr: string[], setArr: (val: string[]) => void) => {
+    if (arr.includes(val)) {
+      setArr(arr.filter(v => v !== val));
+    } else {
+      setArr([...arr, val]);
+    }
+  };
 
 
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -74,11 +83,25 @@ export default function SectionB({ sessionId, onNext, onPrev }: SectionProps) {
       b3_group_size: b3 || null, 
       b4_prior_search: b4 || null,
       b5_baggage: b5 || null,
+      b_pre_info: b6.length > 0 ? b6 : null,
       section_timestamps: timestamps
     });
     
     onNext();
   };
+
+  useEffect(() => {
+    import('@/lib/syncData').then(({ saveSectionDataDebounced }) => {
+      saveSectionDataDebounced(sessionId, {
+        b1_purpose: b1 || null, 
+        b2_first_visit: b2 || null,
+        b3_group_size: b3 || null,
+        b4_prior_search: b4 || null,
+        b5_baggage: b5 || null,
+        b_pre_info: b6.length > 0 ? b6 : null,
+      });
+    });
+  }, [sessionId, b1, b2, b3, b4, b5, b6]);
 
   const isRequiredAnswered = true; // No required questions in Section B
   const isReady = isScrolledToBottom && isRequiredAnswered;
@@ -114,6 +137,27 @@ export default function SectionB({ sessionId, onNext, onPrev }: SectionProps) {
         />
         <SelectionGroup question={t.b4} options={t.b4_options} enOptions={enBase.b4_options} value={b4} onChange={setB4} />
         <SelectionGroup question={t.b5} options={t.b5_options} enOptions={enBase.b5_options} value={b5} onChange={setB5} />
+
+        {/* B6 (Multiple) */}
+        <div>
+          <h2 className="text-[19px] font-bold text-[#191f28] mb-1">{t.b6}</h2>
+          <p className="text-[#8b95a1] text-[14px] mb-4 font-normal">{tc.multiple_select}</p>
+          <div className="flex flex-col gap-3">
+            {t.b6_options?.map((opt: string, i: number) => {
+              const baseValue = enBase.b6_options[i];
+              const isSelected = b6.includes(baseValue);
+              return (
+                <button 
+                  key={i} 
+                  onClick={() => toggleArray(baseValue, b6, setB6)} 
+                  className={`text-left p-4 rounded-2xl text-[16px] font-medium transition-all border ${isSelected ? 'bg-[#e8f3ff] text-[#3182f6] border-[#3182f6] shadow-sm' : 'bg-[#f2f4f6] text-[#4e5968] border-transparent hover:bg-[#e5e8eb]'}`}
+                >
+                  {opt}
+                </button>
+              )
+            })}
+          </div>
+        </div>
 
       </div>
       <div ref={bottomRef} className="h-1" />

@@ -35,10 +35,26 @@ export default function SurveyApp() {
 
     if (existingSession) {
       setSessionId(existingSession);
-      if (!localStorage.getItem('survey_section_timestamps')) {
-        localStorage.setItem('survey_section_timestamps', '{}');
-      }
-      setStep(0);
+      const initResume = () => {
+        try {
+          const timestampsStr = localStorage.getItem('survey_section_timestamps');
+          const timestamps = timestampsStr ? JSON.parse(timestampsStr) : {};
+          
+          let maxStep = 0;
+          if (timestamps['F']) maxStep = 7;
+          else if (timestamps['E']) maxStep = 6;
+          else if (timestamps['D']) maxStep = 5;
+          else if (timestamps['C']) maxStep = 4;
+          else if (timestamps['B']) maxStep = 3;
+          else if (timestamps['A']) maxStep = 2;
+          else maxStep = 1;
+          
+          setStep(maxStep);
+        } catch (err) {
+          setStep(0);
+        }
+      };
+      initResume();
     } else {
       const initSession = async () => {
         const generateUUID = () => {
