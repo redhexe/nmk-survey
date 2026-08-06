@@ -238,6 +238,19 @@ export default function SectionC({ sessionId, onNext, onPrev }: SectionProps) {
           </div>
         </div>
 
+        {/* C4 Matrix */}
+        <div className="bg-[#fafafa] p-5 rounded-3xl border border-gray-100">
+          <h2 className="text-[19px] font-bold text-[#191f28] mb-6">{t.c4}</h2>
+          <RatingMatrix question={t.c4_q[0]} value={c4_1} onChange={setC4_1} minText={t.disagree} maxText={t.agree} />
+          <RatingMatrix question={t.c4_q[1]} value={c4_2} onChange={setC4_2} minText={t.disagree} maxText={t.agree} />
+          <RatingMatrix question={t.c4_q[2]} value={c4_3} onChange={setC4_3} minText={t.disagree} maxText={t.agree} />
+          <RatingMatrix question={t.c4_q[3]} value={c4_4} onChange={setC4_4} minText={t.disagree} maxText={t.agree} />
+          <RatingMatrix question={t.c4_q[4]} value={c4_5} onChange={setC4_5} minText={t.disagree} maxText={t.agree} />
+          <RatingMatrix question={t.c4_q[5]} value={c4_6} onChange={setC4_6} minText={t.disagree} maxText={t.agree} />
+          <RatingMatrix question={t.c4_q[6]} value={c4_7} onChange={setC4_7} minText={t.disagree} maxText={t.agree} />
+          <RatingMatrix question={t.c4_q[7]} value={c4_8} onChange={setC4_8} minText={t.disagree} maxText={t.agree} />
+        </div>
+
         {/* C6 (B-1: Queue Clarity) */}
         <div className="bg-[#fafafa] p-5 rounded-3xl border border-gray-100">
           <RatingMatrix question={t.c6} value={c6} onChange={setC6} minText={t.c6_min || 'Not clear at all'} maxText={t.c6_max || 'Very clear'} />
@@ -302,18 +315,7 @@ export default function SectionC({ sessionId, onNext, onPrev }: SectionProps) {
           </div>
         </div>
 
-        {/* C4 Matrix */}
-        <div className="bg-[#fafafa] p-5 rounded-3xl border border-gray-100">
-          <h2 className="text-[19px] font-bold text-[#191f28] mb-6">{t.c4}</h2>
-          <RatingMatrix question={t.c4_q[0]} value={c4_1} onChange={setC4_1} minText={t.disagree} maxText={t.agree} />
-          <RatingMatrix question={t.c4_q[1]} value={c4_2} onChange={setC4_2} minText={t.disagree} maxText={t.agree} />
-          <RatingMatrix question={t.c4_q[2]} value={c4_3} onChange={setC4_3} minText={t.disagree} maxText={t.agree} />
-          <RatingMatrix question={t.c4_q[3]} value={c4_4} onChange={setC4_4} minText={t.disagree} maxText={t.agree} />
-          <RatingMatrix question={t.c4_q[4]} value={c4_5} onChange={setC4_5} minText={t.disagree} maxText={t.agree} />
-          <RatingMatrix question={t.c4_q[5]} value={c4_6} onChange={setC4_6} minText={t.disagree} maxText={t.agree} />
-          <RatingMatrix question={t.c4_q[6]} value={c4_7} onChange={setC4_7} minText={t.disagree} maxText={t.agree} />
-          <RatingMatrix question={t.c4_q[7]} value={c4_8} onChange={setC4_8} minText={t.disagree} maxText={t.agree} />
-        </div>
+
 
       </div>
       <div ref={bottomRef} className="h-1" />
