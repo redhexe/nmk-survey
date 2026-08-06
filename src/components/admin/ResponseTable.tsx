@@ -24,6 +24,20 @@ const getKoreanLanguageName = (lang: string) => {
   return map[lang] || lang;
 };
 
+const toKST = (utcStr: string | null | undefined): string => {
+  if (!utcStr) return '-';
+  return new Date(utcStr).toLocaleString('ko-KR', {
+    timeZone: 'Asia/Seoul',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+  });
+};
+
 export default function ResponseTable({ responses }: { responses: any[] }) {
   const [expandedRow, setExpandedRow] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -151,7 +165,8 @@ export default function ResponseTable({ responses }: { responses: any[] }) {
                 <React.Fragment key={r.id}>
                   <tr className={`hover:bg-blue-50/30 transition-colors ${r.is_test ? 'bg-gray-50/50 opacity-60' : ''}`}>
                     <td className="px-6 py-4 whitespace-nowrap text-gray-900 font-medium">
-                      {new Date(r.created_at).toLocaleString('ko-KR')}
+                      <div>{toKST(r.created_at)}</div>
+                      {r.scan_at && <div className="text-[10px] text-gray-400 mt-0.5">입장: {toKST(r.scan_at)}</div>}
                     </td>
                     <td className="px-6 py-4 text-gray-600 font-medium">
                       {r.duration_seconds ? (
@@ -219,6 +234,11 @@ export default function ResponseTable({ responses }: { responses: any[] }) {
                   {isExpanded && (
                     <tr className="bg-gray-50/50 border-b border-gray-100">
                       <td colSpan={9} className="px-6 py-6">
+                        <div className="text-xs text-gray-500 mb-3 flex gap-6">
+                          <div><span className="font-semibold text-gray-600">QR 스캔:</span> {toKST(r.scan_at)}</div>
+                          <div><span className="font-semibold text-gray-600">제출 완료:</span> {toKST(r.submitted_at)}</div>
+                          <div><span className="font-semibold text-gray-600">생성(UTC→KST):</span> {toKST(r.created_at)}</div>
+                        </div>
                         <pre className="text-xs text-gray-600 whitespace-pre-wrap bg-white p-4 rounded-xl border border-gray-200 overflow-x-auto shadow-inner">
                           {JSON.stringify(r, null, 2)}
                         </pre>
