@@ -1,7 +1,7 @@
 {
   "screen0": {
     "welcome": "Enquête sur l'expérience des visiteurs",
-    "intro": "<div class=\"mb-3\">Merci de votre visite<br>au Musée national de Corée.</div><div class=\"mb-3\">Je suis chercheur/chercheuse à l'École<br>supérieure de design technologique<br>de l'Université Kookmin.<br>Ce court questionnaire (<strong>environ 4 minutes</strong>)<br>s'inscrit dans une étude visant à améliorer<br>l'expérience des visiteurs<br>internationaux comme vous.</div><div class=\"mb-3\">Toutes les réponses sont <strong>entièrement<br>anonymes</strong> — aucune information personnelle<br>identifiable n'est collectée.</div>",
+    "intro": "<div class=\"mb-3\">Merci de votre visite<br>au Musée national de Corée.</div><div class=\"mb-3\">Je suis chercheur/chercheuse à l'École<br>supérieure de design technologique<br>de l'Université Kookmin.<br>Ce court questionnaire (<strong>environ 4 à 6 minutes</strong>)<br>s'inscrit dans une étude visant à améliorer<br>l'expérience des visiteurs<br>internationaux comme vous.</div><div class=\"mb-3\">Toutes les réponses sont <strong>entièrement<br>anonymes</strong> — aucune information personnelle<br>identifiable n'est collectée.</div>",
     "consent": "Je comprends et j'accepte de participer",
     "instruction": "Veuillez remplir ce questionnaire juste avant d'entrer dans les salles d'exposition. Vous pouvez répondre à cette enquête en plusieurs fois pendant votre attente.",
     "ok": "Commencer le questionnaire",
@@ -110,7 +110,7 @@
       "Le long couloir intérieur avant les salles d'exposition",
       "Rien ne m'a semblé particulièrement inconfortable"
     ],
-    "c5": "C5. Combien de temps pensez-vous avoir réellement attendu avant d'entrer dans les salles ?",
+    "c5": "C5. Combien de minutes pensez-vous avoir attendu jusqu'à présent ?",
     "c5_options": [
       "Moins de 5 minutes",
       "5-10 minutes",
@@ -181,7 +181,6 @@
     "e1_options": [
       "J'ai regardé mon téléphone",
       "J'ai discuté avec mes accompagnateurs",
-      "J'ai regardé autour de moi",
       "J'ai lu les panneaux",
       "J'ai pris un dépliant ou un plan à l'entrée",
       "Rien en particulier",
@@ -204,7 +203,8 @@
       "Anglais",
       "Chinois",
       "Japonais",
-      "Je n'ai pu comprendre aucun des panneaux ou guides"
+      "Je n'ai pu comprendre aucun des panneaux ou guides",
+      "J'ai utilisé une application de traduction"
     ],
     "e4": "E4. Avez-vous eu des difficultés à obtenir des informations au musée aujourd'hui ?",
     "e4_options": [
@@ -242,7 +242,7 @@
       "Une introduction à l'histoire et à la culture coréennes",
       "Je n'utiliserais probablement aucun d'entre eux"
     ],
-    "f3": "F3. L'attente pour entrer ne peut pas être totalement supprimée en raison du nombre de visiteurs. Qu'est-ce qui vous aiderait le plus ?",
+    "f3": "F3. En cas d'attente, laquelle des options suivantes vous aiderait le plus ?",
     "f3_options": [
       "Réduire le temps d'attente lui-même",
       "Me dire exactement combien de temps je dois attendre",

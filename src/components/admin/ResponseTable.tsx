@@ -19,7 +19,8 @@ const getKoreanLanguageName = (lang: string) => {
     'Korean': '한국어',
     'Spanish': '스페인어',
     'French': '프랑스어',
-    'None of these (there was no guidance in my language)': '지원 안됨'
+    'None of these (there was no guidance in my language)': '지원 안됨',
+    'I used a translation app': '번역앱',
   };
   return map[lang] || lang;
 };
@@ -200,20 +201,41 @@ export default function ResponseTable({ responses }: { responses: any[] }) {
                       {getKoreanCountryName(r.a1_country)}
                     </td>
                     <td className="px-6 py-4 text-center text-xs">
-                      {r.a4_language && r.e3_signage_language ? (
-                        (() => {
-                          const a4Ko = getKoreanLanguageName(r.a4_language);
-                          const e3Ko = getKoreanLanguageName(r.e3_signage_language);
-                          const isMismatch = r.e3_signage_language === 'None of these (there was no guidance in my language)' || r.a4_language !== r.e3_signage_language;
-                          return (
-                            <span className={`font-bold ${isMismatch ? 'text-red-500' : 'text-green-500'}`}>
-                              {a4Ko} → {e3Ko}
-                            </span>
-                          );
-                        })()
-                      ) : (
-                        <span className="text-gray-300">-</span>
-                      )}
+                      {(() => {
+                        const a4 = r.a4_language;
+                        const e3Raw = r.e3_signage_language;
+                        if (!a4 || !e3Raw) return <span className="text-gray-300">-</span>;
+
+                        // 배열(신관) 또는 문자열(구관) 양행 지원
+                        const e3Arr: string[] = Array.isArray(e3Raw)
+                          ? e3Raw
+                          : (typeof e3Raw === 'string' && e3Raw !== '' ? [e3Raw] : []);
+
+                        if (e3Arr.length === 0) return <span className="text-gray-300">-</span>;
+
+                        // 번역앱은 언어 일치 판정에서 제외
+                        const TRANSLATION_APP = 'I used a translation app';
+                        const languageItems = e3Arr.filter(v => v !== TRANSLATION_APP);
+
+                        // 언어 선택이 없으면(번역앱만 선택) 판정 불가
+                        if (languageItems.length === 0) return <span className="text-gray-300">-</span>;
+
+                        const NONE = 'None of these (there was no guidance in my language)';
+                        const isMismatch =
+                          languageItems.includes(NONE) ||
+                          !languageItems.includes(a4);
+
+                        const a4Ko = getKoreanLanguageName(a4);
+                        const e3Display = e3Arr
+                          .map(v => getKoreanLanguageName(v))
+                          .join(', ');
+
+                        return (
+                          <span className={`font-bold ${isMismatch ? 'text-red-500' : 'text-green-500'}`}>
+                            {a4Ko} → {e3Display}
+                          </span>
+                        );
+                      })()}
                     </td>
                     <td className="px-6 py-4 flex gap-1.5 flex-wrap">
                       {tags.map((tag, i) => (

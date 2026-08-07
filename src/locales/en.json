@@ -1,7 +1,7 @@
 {
   "screen0": {
     "welcome": "Visitor Experience Survey",
-    "intro": "<div class=\"mb-3\">Thank you for visiting<br>the National Museum of Korea.</div><div class=\"mb-3\">I am a researcher at the Graduate School<br>of Techno Design, Kookmin University.<br>This short survey is part of my study<br>to improve the visit experience<br>for international visitors.</div><div class=\"mb-3\">It takes only <strong>about 4 minutes</strong><br>and all responses are <strong>completely anonymous</strong><br>— no personal identifying information is collected.</div>",
+    "intro": "<div class=\"mb-3\">Thank you for visiting<br>the National Museum of Korea.</div><div class=\"mb-3\">I am a researcher at the Graduate School<br>of Techno Design, Kookmin University.<br>This short survey is part of my study<br>to improve the visit experience<br>for international visitors.</div><div class=\"mb-3\">It takes <strong>about 4–6 minutes</strong><br>and all responses are <strong>completely anonymous</strong><br>— no personal identifying information is collected.</div>",
     "consent": "I understand and agree to participate",
     "instruction": "Please complete this just before you enter the exhibition halls. You can answer this survey in parts while waiting.",
     "ok": "Start Survey",
@@ -110,7 +110,7 @@
       "The long indoor corridor before the exhibition halls",
       "Nothing felt particularly uncomfortable"
     ],
-    "c5": "C5. How long do you think you actually waited before entering the exhibition halls?",
+    "c5": "C5. How many minutes do you think you have waited so far?",
     "c5_options": [
       "Less than 5 minutes",
       "5–10 minutes",
@@ -181,7 +181,6 @@
     "e1_options": [
       "Looked at my phone",
       "Talked with my companions",
-      "Looked around",
       "Read signage",
       "Picked up a leaflet or map at the entrance",
       "Nothing in particular",
@@ -204,7 +203,8 @@
       "English",
       "Chinese",
       "Japanese",
-      "I couldn't understand any of the signs/guides"
+      "I couldn't understand any of the signs/guides",
+      "I used a translation app"
     ],
     "e4": "E4. Did you have any difficulty getting information at the museum today?",
     "e4_options": [
@@ -242,7 +242,7 @@
       "Introduction to Korean history and culture",
       "I probably would not use any of these"
     ],
-    "f3": "F3. Waiting to enter cannot be fully removed because of the number of visitors. Which of the following would help you most?",
+    "f3": "F3. If waiting occurs, which of the following would help you most?",
     "f3_options": [
       "Reducing the waiting time itself",
       "Telling me exactly how long I need to wait",

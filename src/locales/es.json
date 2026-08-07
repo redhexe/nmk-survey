@@ -1,7 +1,7 @@
 {
   "screen0": {
     "welcome": "Encuesta de experiencia del visitante",
-    "intro": "<div class=\"mb-3\">Gracias por visitar<br>el Museo Nacional de Corea.</div><div class=\"mb-3\">Soy investigador/a de la Escuela de Posgrado<br>en Diseño Tecnológico<br>de la Universidad Kookmin.<br>Esta breve encuesta (<strong>unos 4 minutos</strong>)<br>forma parte de un estudio para mejorar<br>la experiencia de los visitantes<br>internacionales como usted.</div><div class=\"mb-3\">Todas las respuestas son <strong>completamente<br>anónimas</strong> — no se recopila ninguna<br>información personal identificable.</div>",
+    "intro": "<div class=\"mb-3\">Gracias por visitar<br>el Museo Nacional de Corea.</div><div class=\"mb-3\">Soy investigador/a de la Escuela de Posgrado<br>en Diseño Tecnológico<br>de la Universidad Kookmin.<br>Esta breve encuesta (<strong>unos 4–6 minutos</strong>)<br>forma parte de un estudio para mejorar<br>la experiencia de los visitantes<br>internacionales como usted.</div><div class=\"mb-3\">Todas las respuestas son <strong>completamente<br>anónimas</strong> — no se recopila ninguna<br>información personal identificable.</div>",
     "consent": "Comprendo y acepto participar",
     "instruction": "Por favor, complete esta encuesta justo antes de entrar a las salas de exposición. Puede responder a esta encuesta por partes mientras espera.",
     "ok": "Iniciar encuesta",
@@ -110,7 +110,7 @@
       "El largo pasillo interior antes de las salas de exposición",
       "Nada me pareció particularmente incómodo"
     ],
-    "c5": "C5. ¿Cuánto tiempo cree que esperó realmente antes de entrar a las salas de exposición?",
+    "c5": "C5. ¿Cuántos minutos cree que ha esperado hasta ahora?",
     "c5_options": [
       "Menos de 5 minutos",
       "5-10 minutos",
@@ -181,7 +181,6 @@
     "e1_options": [
       "Miré mi teléfono",
       "Hablé con mis acompañantes",
-      "Miré alrededor",
       "Leí los letreros",
       "Tomé un folleto o mapa en la entrada",
       "Nada en particular",
@@ -204,7 +203,8 @@
       "Inglés",
       "Chino",
       "Japonés",
-      "No pude entender ninguna de las señales o guías"
+      "No pude entender ninguna de las señales o guías",
+      "Usé una aplicación de traducción"
     ],
     "e4": "E4. ¿Tuvo alguna dificultad para obtener información en el museo hoy?",
     "e4_options": [
@@ -242,7 +242,7 @@
       "Introducción a la historia y cultura coreanas",
       "Probablemente no usaría nada de esto"
     ],
-    "f3": "F3. La espera para ingresar no se puede evitar por completo debido a la cantidad de visitantes. ¿Cuál de lo siguiente le ayudaría más?",
+    "f3": "F3. Si hay que esperar, ¿cuál de las siguientes opciones le ayudaría más?",
     "f3_options": [
       "Reducir el tiempo de espera en sí",
       "Que me digan exactamente cuánto tiempo debo esperar",

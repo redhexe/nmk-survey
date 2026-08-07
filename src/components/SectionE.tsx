@@ -21,7 +21,14 @@ export default function SectionE({ sessionId, onNext, onPrev }: SectionProps) {
 
   const [e1, setE1] = useState<string[]>(getInitData('e1_activities', []));
   const [e2, setE2] = useState<string[]>(getInitData('e2_phone_content', []));
-  const [e3, setE3] = useState<string>(getInitData('e3_signage_language', ''));
+  // e3: backward-compat — old data may be a string (single answer), new data is string[]
+  const [e3, setE3] = useState<string[]>(() => {
+    const raw = getInitData('e3_signage_language', null);
+    if (!raw) return [];
+    if (Array.isArray(raw)) return raw;
+    if (typeof raw === 'string' && raw !== '') return [raw];
+    return [];
+  });
   const [e4, setE4] = useState<string[]>(getInitData('e4_difficulties', []));
   const [e5, setE5] = useState<string>(getInitData('e_leaflet_aware', ''));
   
@@ -56,7 +63,7 @@ export default function SectionE({ sessionId, onNext, onPrev }: SectionProps) {
     saveSectionDataBackground(sessionId, { 
       e1_activities: e1.length > 0 ? e1 : null,
       e2_phone_content: showE2 && e2.length > 0 ? e2 : [], // if not shown or empty, empty array
-      e3_signage_language: e3 || null,
+      e3_signage_language: e3.length > 0 ? e3 : null,
       e4_difficulties: e4.length > 0 ? e4 : null,
       e_leaflet_aware: e5 || null,
       section_timestamps: timestamps
@@ -70,7 +77,7 @@ export default function SectionE({ sessionId, onNext, onPrev }: SectionProps) {
       saveSectionDataDebounced(sessionId, {
         e1_activities: e1.length > 0 ? e1 : null,
         e2_phone_content: showE2 && e2.length > 0 ? e2 : [],
-        e3_signage_language: e3 || null,
+        e3_signage_language: e3.length > 0 ? e3 : null,
         e4_difficulties: e4.length > 0 ? e4 : null,
         e_leaflet_aware: e5 || null,
       });
@@ -152,22 +159,55 @@ export default function SectionE({ sessionId, onNext, onPrev }: SectionProps) {
           </div>
         )}
 
-        {/* E3 */}
+        {/* E3 — 복수 선택, None은 exclusive */}
         <div>
-          <h2 className="text-[19px] font-bold text-[#191f28] mb-4">{t.e3}</h2>
+          <h2 className="text-[19px] font-bold text-[#191f28] mb-1">{t.e3}</h2>
+          <p className="text-[#8b95a1] text-[14px] mb-4 font-normal">{tc.multiple_select}</p>
           <div className="flex flex-wrap gap-2">
             {t.e3_options.map((opt: string, i: number) => {
-              const e3_db_values = ["Korean", "English", "Chinese", "Japanese", "None of these (there was no guidance in my language)"];
+              // DB 저장값 (EN 기준 고정)
+              const e3_db_values = [
+                'Korean',
+                'English',
+                'Chinese',
+                'Japanese',
+                'None of these (there was no guidance in my language)',
+                'I used a translation app',
+              ];
               const baseValue = e3_db_values[i];
+              const isNoneOption = baseValue === 'None of these (there was no guidance in my language)';
+              const isSelected = e3.includes(baseValue);
+
+              const handleE3Toggle = () => {
+                if (isNoneOption) {
+                  // None 선택 → 나머지 모두 해제, None만 남김
+                  setE3(isSelected ? [] : [baseValue]);
+                } else {
+                  // 언어/번역앱 선택 → None이 있으면 제거 후 토글
+                  setE3(prev => {
+                    const withoutNone = prev.filter(
+                      v => v !== 'None of these (there was no guidance in my language)'
+                    );
+                    return withoutNone.includes(baseValue)
+                      ? withoutNone.filter(v => v !== baseValue)
+                      : [...withoutNone, baseValue];
+                  });
+                }
+              };
+
               return (
-                <button 
-                  key={i} 
-                  onClick={() => setE3(e3 === baseValue ? '' : baseValue)} 
-                  className={`text-left px-4 py-3 rounded-full text-[15px] font-medium transition-all border ${e3 === baseValue ? 'bg-[#3182f6] text-white border-[#3182f6]' : 'bg-white text-[#4e5968] border-[#e5e8eb] hover:bg-[#f2f4f6]'}`}
+                <button
+                  key={i}
+                  onClick={handleE3Toggle}
+                  className={`text-left px-4 py-3 rounded-full text-[15px] font-medium transition-all border ${
+                    isSelected
+                      ? 'bg-[#e8f3ff] text-[#3182f6] border-[#3182f6]'
+                      : 'bg-white text-[#4e5968] border-[#e5e8eb] hover:bg-[#f2f4f6]'
+                  }`}
                 >
                   {opt}
                 </button>
-              )
+              );
             })}
           </div>
         </div>
